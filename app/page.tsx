@@ -24,8 +24,8 @@ function formatM(v: number) {
 }
 
 const TIPOLOGIAS_HERO = [
-  { tipo: "FLAT HOUSE", tag: "Más buscado", area: 92, img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo1.jpg" },
-  { tipo: "BALCONY", tag: "Vista panorámica", area: 75, img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo2.jpg" },
+  { tipo: "FLAT HOUSE", tag: "Más buscado", area: 92, img: "https://cgconstructora.com/wp-content/uploads/2025/05/DUP-SALA-DUPLEX-1.jpg" },
+  { tipo: "BALCONY", tag: "Vista panorámica", area: 75, img: "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-SOLARIUM.jpg" },
   { tipo: "PRESTIGE 117", tag: "Edición Limitada", area: 130, img: "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-SALA-V3.jpg" },
 ];
 

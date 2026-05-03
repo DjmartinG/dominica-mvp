@@ -8,12 +8,15 @@ import { Tipologias } from "@/components/brochure/Tipologias";
 import { Amenidades } from "@/components/brochure/Amenidades";
 import { Recorrido360 } from "@/components/brochure/Recorrido360";
 import { Etapas } from "@/components/brochure/Etapas";
+import { CierreComercial } from "@/components/brochure/CierreComercial";
+import { CTAFloat } from "@/components/brochure/CTAFloat";
 
 export default function BrochurePage() {
   return (
     <>
       <TopBar />
       <NavTop />
+
       <main>
         <HeroCarousel />
         <ElProyecto />
@@ -22,7 +25,11 @@ export default function BrochurePage() {
         <Amenidades />
         <Recorrido360 />
         <Etapas />
+        <CierreComercial />
       </main>
+
+      <CTAFloat />
+
       <FooterDominica />
     </>
   );

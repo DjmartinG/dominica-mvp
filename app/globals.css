@@ -33,7 +33,7 @@ html, body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-cormorant), 'Georgia', serif;
+  font-family: var(--font-lora), 'Georgia', serif;
   font-weight: 500;
   letter-spacing: 0.01em;
 }
@@ -115,7 +115,7 @@ h1, h2, h3, h4 {
 
 /* Section title */
 .section-title {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-lora), serif;
   font-weight: 500;
   font-size: clamp(2rem, 4vw, 3.5rem);
   letter-spacing: 0.05em;
@@ -137,7 +137,7 @@ h1, h2, h3, h4 {
 
 /* Hero watermark */
 .hero-watermark {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-lora), serif;
   font-weight: 400;
   font-size: clamp(4rem, 12vw, 11rem);
   line-height: 0.9;
@@ -154,7 +154,7 @@ h1, h2, h3, h4 {
 
 /* Stats number serif */
 .stat-number-serif {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-lora), serif;
   font-weight: 400;
   font-size: clamp(3rem, 5vw, 4.5rem);
   line-height: 1;
@@ -188,4 +188,13 @@ h1, h2, h3, h4 {
 /* Print */
 @media print {
   .no-print { display: none !important; }
+}
+
+/* ============ TRANSICIONES ENTRE PÁGINAS ============ */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+main {
+  animation: pageFadeIn 0.4s ease-out;
 }

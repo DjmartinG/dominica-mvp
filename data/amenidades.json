@@ -59,42 +59,42 @@
     "id": "coworking",
     "nombre": "Coworking",
     "descripcion": "Espacio de coworking con conectividad y luz natural",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/DUP-ESTUDIO-DUPLEX.jpg",
     "icono": "Briefcase"
   },
   {
     "id": "bbq",
     "nombre": "Zona BBQ",
     "descripcion": "Zona BBQ al aire libre para reuniones",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/render2.jpg",
     "icono": "Flame"
   },
   {
     "id": "cancha",
     "nombre": "Cancha Multipropósito",
     "descripcion": "Cancha multipropósito para deporte y recreación",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/render4.jpg",
     "icono": "Trophy"
   },
   {
     "id": "cine",
     "nombre": "Sala de Cine",
     "descripcion": "Sala de cine para uso exclusivo de residentes",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-SALA-V3.jpg",
     "icono": "Film"
   },
   {
     "id": "juegos",
     "nombre": "Salón de Juegos",
     "descripcion": "Salón de juegos para todas las edades",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/DUP-SALA-DUPLEX-1.jpg",
     "icono": "Dices"
   },
   {
     "id": "ofuro",
     "nombre": "Terraza Ofuro",
     "descripcion": "Terraza con ofuro inspirada en la cultura del bienestar",
-    "imagen": null,
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-BANO-HABITACION.jpg",
     "icono": "Bath"
   }
 ]

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { NavTop } from "@/components/NavTop";
 import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AptoSelector } from "@/components/cotizador/AptoSelector";
 import { ParqueaderoToggle } from "@/components/cotizador/ParqueaderoToggle";
 import { DepositoSelector } from "@/components/cotizador/DepositoSelector";
@@ -22,7 +23,7 @@ import {
   validarApto, validarDescuento, validarDeposito,
   generarNumeroCotizacion, calcularFechaVencimiento,
 } from "@/lib/cotizador";
-import { ArrowLeft, User as UserIcon } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 
 const SIN_DEPOSITO = (depositos as Deposito[]).find((d) => d.id === "sin")!;
 const CLIENTE_VACIO: Cliente = { nombre: "", documento: "", celular: "", email: "" };
@@ -95,7 +96,7 @@ export default function CotizarPage() {
     stored.push(final);
     localStorage.setItem("dominica_cotizaciones", JSON.stringify(stored));
     setGuardada(true);
-    setTimeout(() => setGuardada(false), 3000);
+    setTimeout(() => setGuardada(false), 4000);
   };
 
   return (
@@ -105,20 +106,16 @@ export default function CotizarPage() {
 
       <main className="bg-beige min-h-screen pt-[140px] pb-16 px-4 sm:px-6 lg:px-12 print:bg-white print:py-0">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
+          {/* Breadcrumbs + back link */}
           <div className="flex items-center justify-between mb-8 no-print">
-            <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-negro hover:text-rojo transition-colors uppercase">
-              <ArrowLeft className="w-4 h-4" />
-              Volver
+            <Breadcrumbs items={[{ label: "Cotizador" }]} />
+            <Link
+              href="/brochure"
+              className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] uppercase text-gris hover:text-rojo transition-colors"
+            >
+              <BookOpen className="w-4 h-4" />
+              Volver al brochure
             </Link>
-            {asesor && (
-              <div className="bg-white px-4 py-2 shadow-card flex items-center gap-2">
-                <UserIcon className="w-4 h-4 text-rojo" />
-                <span className="text-xs tracking-wide uppercase">
-                  Asesor: <strong className="text-negro">{asesor.nombre}</strong>
-                </span>
-              </div>
-            )}
           </div>
 
           <div className="text-center mb-12">
@@ -130,7 +127,6 @@ export default function CotizarPage() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Columna izquierda */}
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-white p-8">
                 <h2 className="font-display text-2xl text-negro tracking-wide mb-6">1 · Tu apartamento</h2>
@@ -171,7 +167,6 @@ export default function CotizarPage() {
               )}
             </div>
 
-            {/* Columna derecha */}
             <div className="lg:col-span-1 space-y-4">
               <ResumenEconomico
                 apto={apto}
@@ -184,8 +179,26 @@ export default function CotizarPage() {
                 <AccionesFinales cotizacion={cotizacion} disabled={!completo} onGuardar={handleGuardar} />
               )}
               {guardada && (
-                <div className="bg-ok/10 border border-ok text-ok p-3 text-sm font-semibold text-center tracking-wide">
-                  ✓ Cotización guardada exitosamente
+                <div className="bg-ok/10 border border-ok p-4 text-center">
+                  <p className="text-ok font-semibold text-sm tracking-wide mb-3">✓ Cotización guardada</p>
+                  <div className="flex flex-col sm:flex-row gap-2 text-xs">
+                    <button
+                      onClick={() => {
+                        setApto(null);
+                        setCliente(CLIENTE_VACIO);
+                        setDescuento(0);
+                      }}
+                      className="flex-1 px-3 py-2 bg-navy text-white tracking-[0.15em] uppercase hover:bg-navy-dark transition-colors"
+                    >
+                      Cotizar otro
+                    </button>
+                    <Link
+                      href="/brochure"
+                      className="flex-1 px-3 py-2 border border-negro text-negro tracking-[0.15em] uppercase hover:bg-negro hover:text-white transition-colors"
+                    >
+                      Volver al brochure
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>

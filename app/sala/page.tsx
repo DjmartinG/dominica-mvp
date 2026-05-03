@@ -6,9 +6,10 @@ import { useState } from "react";
 import { NavTop } from "@/components/NavTop";
 import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import asesores from "@/data/asesores.json";
 import { brand } from "@/lib/design-tokens";
-import { ArrowLeft, ChevronRight, User } from "lucide-react";
+import { ChevronRight, User } from "lucide-react";
 
 export default function SalaPage() {
   const router = useRouter();
@@ -33,13 +34,9 @@ export default function SalaPage() {
 
       <main className="bg-beige min-h-screen pt-[140px] pb-20 px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] text-negro hover:text-rojo mb-8 uppercase transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver
-          </Link>
+          <div className="mb-8">
+            <Breadcrumbs items={[{ label: "Modo Sala" }]} />
+          </div>
 
           <div className="bg-white shadow-card p-8 lg:p-12">
             <div className="text-center mb-10">
@@ -47,7 +44,7 @@ export default function SalaPage() {
               <h1 className="font-display text-3xl lg:text-4xl text-negro tracking-wide mb-3">
                 Bienvenido, asesor
               </h1>
-              <p className="text-gris text-sm leading-relaxed">
+              <p className="text-gris text-sm leading-relaxed max-w-md mx-auto">
                 Selecciona tu nombre para iniciar el tour con el cliente. Tu información quedará asociada a la cotización al final del proceso.
               </p>
             </div>
@@ -92,9 +89,27 @@ export default function SalaPage() {
               <ChevronRight className="w-4 h-4" />
             </button>
 
-            <p className="text-[10px] tracking-[0.2em] uppercase text-gris/70 text-center mt-6">
-              {brand.proyecto.direccion} · {brand.proyecto.estructura}
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 text-[10px] tracking-[0.2em] uppercase text-gris/70">
+              <span>{brand.proyecto.direccion}</span>
+              <span className="hidden sm:inline">·</span>
+              <span>{brand.proyecto.estructura}</span>
+            </div>
+          </div>
+
+          {/* Info adicional para asesores */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div className="bg-white p-4 border border-gris-muyclaro">
+              <p className="font-display text-2xl text-rojo">39</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-gris mt-1">Disponibles T4</p>
+            </div>
+            <div className="bg-white p-4 border border-gris-muyclaro">
+              <p className="font-display text-2xl text-rojo">10</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-gris mt-1">Tipologías</p>
+            </div>
+            <div className="bg-white p-4 border border-gris-muyclaro">
+              <p className="font-display text-2xl text-rojo">3</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-gris mt-1">Planes pago</p>
+            </div>
           </div>
         </div>
       </main>

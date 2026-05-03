@@ -11,18 +11,10 @@ export function FooterDominica() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logos/dominica-logo.png"
-              style={{ filter: "brightness(0) invert(1)" }}
               alt="Apartamentos Dominica"
               className="h-14 w-auto object-contain mb-5"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-                const sibling = (e.target as HTMLImageElement).nextElementSibling;
-                if (sibling) (sibling as HTMLElement).style.display = "block";
-              }}
+              style={{ filter: "brightness(0) invert(1)" }}
             />
-            <span style={{ display: "none" }} className="font-display text-3xl font-bold text-rojo tracking-[0.15em] block mb-5">
-              DOMINICA
-            </span>
             <p className="text-xs text-gris-claro leading-relaxed">
               Apartamentos NO VIS Premium<br/>
               {brand.proyecto.direccion}<br/><br/>
@@ -59,6 +51,7 @@ export function FooterDominica() {
               <li className="text-sm text-gris-claro">Crédito {brand.creditoConstructor}</li>
               <li className="text-sm text-gris-claro">Certificación {brand.proyecto.certificacion}</li>
               <li className="text-sm text-gris-claro italic">{brand.empresa.fraseCorporativa}</li>
+              <li className="pt-2 border-t border-white/10 mt-2"><Link href="/vendedora" className="text-[10px] tracking-[0.25em] uppercase text-gris-claro hover:text-rojo transition-colors flex items-center gap-1">→ Panel Asesoras</Link></li>
             </ul>
           </div>
         </div>
@@ -77,13 +70,7 @@ export function FooterDominica() {
                 alt="CG Constructora"
                 className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
                 style={{ filter: "brightness(0) invert(1)" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                  const sibling = (e.target as HTMLImageElement).nextElementSibling;
-                  if (sibling) (sibling as HTMLElement).style.display = "block";
-                }}
               />
-              <span style={{ display: "none" }} className="font-display text-xl text-white">CG CONSTRUCTORA</span>
             </div>
 
             <div className="hidden sm:block w-px h-12 bg-white/20" />
@@ -96,13 +83,7 @@ export function FooterDominica() {
                 alt="Triple A — Proyectos y Construcciones"
                 className="h-12 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
                 style={{ filter: "brightness(0) invert(1)" }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                  const sibling = (e.target as HTMLImageElement).nextElementSibling;
-                  if (sibling) (sibling as HTMLElement).style.display = "block";
-                }}
               />
-              <span style={{ display: "none" }} className="font-display text-xl text-white">TRIPLE A</span>
             </div>
           </div>
         </div>

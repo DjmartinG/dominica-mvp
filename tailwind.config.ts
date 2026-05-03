@@ -38,8 +38,8 @@ const config: Config = {
         warn: "#F9A825",
       },
       fontFamily: {
-        display: ["var(--font-cormorant)", "Georgia", "serif"],
-        serif: ["var(--font-cormorant)", "Georgia", "serif"],
+        display: ["var(--font-lora)", "Georgia", "serif"],
+        serif: ["var(--font-lora)", "Georgia", "serif"],
         sans: ["var(--font-inter)", "Arial", "sans-serif"],
       },
       fontSize: {

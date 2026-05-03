@@ -17,10 +17,10 @@ interface Apto {
 }
 
 const TIPOLOGIAS_DESTACADAS = [
-  { tipo: "FLAT HOUSE", desc: "Tipología base con balcón amplio", img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo1.jpg", area: 92, tag: "Más buscado" },
-  { tipo: "BALCONY", desc: "Énfasis en balcón panorámico exterior", img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo2.jpg", area: 75, tag: "Vista panorámica" },
-  { tipo: "VIEW", desc: "Optimizado para vista exterior", img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo3.jpg", area: 74, tag: "Vista privilegiada" },
-  { tipo: "SKY", desc: "Tipología de pisos altos con vista privilegiada", img: "https://cgconstructora.com/wp-content/uploads/2024/09/plantatipo3.jpg", area: 71, tag: "Pisos altos" },
+  { tipo: "FLAT HOUSE", desc: "Tipología base con balcón amplio", img: "https://cgconstructora.com/wp-content/uploads/2025/05/DUP-SALA-DUPLEX-1.jpg", area: 92, tag: "Más buscado" },
+  { tipo: "BALCONY", desc: "Énfasis en balcón panorámico exterior", img: "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-SOLARIUM.jpg", area: 75, tag: "Vista panorámica" },
+  { tipo: "VIEW", desc: "Optimizado para vista exterior", img: "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-HABITACION-V2.jpg", area: 74, tag: "Vista privilegiada" },
+  { tipo: "SKY", desc: "Tipología de pisos altos con vista privilegiada", img: "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-PH-T6-V2.jpg", area: 71, tag: "Pisos altos" },
   { tipo: "PRESTIGE 117", desc: "Penthouse con terraza 14m². Solo piso 5", img: "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-SALA-V3.jpg", area: 130, tag: "Edición Limitada" },
   { tipo: "PRESTIGE 80", desc: "Premium con terraza de 28m²", img: "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP11-COCINA.jpg", area: 108, tag: "Premium" },
   { tipo: "DUPLEX", desc: "Duplex con estudio en planta superior", img: "https://cgconstructora.com/wp-content/uploads/2025/05/DUP-SALA-DUPLEX-1.jpg", area: 130, tag: "Doble altura" },
