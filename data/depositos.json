@@ -1,0 +1,90 @@
+[
+  {
+    "id": "sin",
+    "nombre": "Sin Depósito",
+    "area": 0,
+    "precioM2": 0,
+    "valor": 0,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-01",
+    "nombre": "D-01",
+    "area": 1.47,
+    "precioM2": 3250000,
+    "valor": 4777500,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-02",
+    "nombre": "D-02",
+    "area": 1.42,
+    "precioM2": 3250000,
+    "valor": 4615000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-03",
+    "nombre": "D-03",
+    "area": 1.88,
+    "precioM2": 3250000,
+    "valor": 6110000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-04",
+    "nombre": "D-04",
+    "area": 1.85,
+    "precioM2": 3250000,
+    "valor": 6012500,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-05",
+    "nombre": "D-05",
+    "area": 2.4,
+    "precioM2": 3250000,
+    "valor": 7800000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-06",
+    "nombre": "D-06",
+    "area": 1.86,
+    "precioM2": 3250000,
+    "valor": 6045000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-07",
+    "nombre": "D-07",
+    "area": 1.88,
+    "precioM2": 3250000,
+    "valor": 6110000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-08",
+    "nombre": "D-08",
+    "area": 1.82,
+    "precioM2": 3250000,
+    "valor": 5915000,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-09",
+    "nombre": "D-09",
+    "area": 1.83,
+    "precioM2": 3250000,
+    "valor": 5947500,
+    "estado": "Disponible"
+  },
+  {
+    "id": "D-10",
+    "nombre": "D-10",
+    "area": 1.86,
+    "precioM2": 3250000,
+    "valor": 6045000,
+    "estado": "Vendido"
+  }
+]

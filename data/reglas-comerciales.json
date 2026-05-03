@@ -1,0 +1,13 @@
+{
+  "descuentoMaxLibre": 0.03,
+  "descuentoMaxConAprobacion": 0.05,
+  "vigenciaDias": 8,
+  "separacionMinima": 9000000,
+  "cuotaInicialPctEstandar": 0.3,
+  "subrogacionPct": 0.7,
+  "descuentoContado": 0.04,
+  "fechaSeparacion": "2026-05-31",
+  "fechaPrimerPago": "2026-06-30",
+  "fechaEntregaProyectada": "2028-07-30",
+  "numCuotasEstandar": 26
+}

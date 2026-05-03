@@ -1,0 +1,30 @@
+[
+  {
+    "codigo": "BETTY",
+    "nombre": "Betty Sánchez",
+    "cedula": "0000000001",
+    "celular": "3001234567",
+    "email": "betty@cgconstructora.com"
+  },
+  {
+    "codigo": "SEILOR",
+    "nombre": "Seilor Martínez",
+    "cedula": "0000000002",
+    "celular": "3001234568",
+    "email": "seilor@cgconstructora.com"
+  },
+  {
+    "codigo": "MARITZA",
+    "nombre": "Maritza López",
+    "cedula": "0000000003",
+    "celular": "3001234569",
+    "email": "maritza@cgconstructora.com"
+  },
+  {
+    "codigo": "ALEJANDRO",
+    "nombre": "Alejandro Gómez",
+    "cedula": "0000000004",
+    "celular": "3001234570",
+    "email": "alejandro@cgconstructora.com"
+  }
+]

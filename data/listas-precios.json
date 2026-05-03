@@ -1,0 +1,90 @@
+[
+  {
+    "nombre": "Lista 0",
+    "azul": 5800000,
+    "aguamarina": 5850000,
+    "amarillo": 5950000,
+    "naranja": 6050000,
+    "rojo": 6100000,
+    "rojoOsc": 6200000,
+    "parqCubierto": 33000000,
+    "parqDoble": 63000000
+  },
+  {
+    "nombre": "Lista 1",
+    "azul": 5836000,
+    "aguamarina": 5887000,
+    "amarillo": 5987000,
+    "naranja": 6088000,
+    "rojo": 6138000,
+    "rojoOsc": 6239000,
+    "parqCubierto": 33205000,
+    "parqDoble": 63391000
+  },
+  {
+    "nombre": "Lista 2",
+    "azul": 5873000,
+    "aguamarina": 5924000,
+    "amarillo": 6025000,
+    "naranja": 6126000,
+    "rojo": 6177000,
+    "rojoOsc": 6278000,
+    "parqCubierto": 33411000,
+    "parqDoble": 63785000
+  },
+  {
+    "nombre": "Lista 3",
+    "azul": 5910000,
+    "aguamarina": 5961000,
+    "amarillo": 6063000,
+    "naranja": 6164000,
+    "rojo": 6216000,
+    "rojoOsc": 6317000,
+    "parqCubierto": 33619000,
+    "parqDoble": 64181000
+  },
+  {
+    "nombre": "Lista 4",
+    "azul": 5947000,
+    "aguamarina": 5998000,
+    "amarillo": 6101000,
+    "naranja": 6203000,
+    "rojo": 6255000,
+    "rojoOsc": 6357000,
+    "parqCubierto": 33828000,
+    "parqDoble": 64579000
+  },
+  {
+    "nombre": "Lista 5",
+    "azul": 5984000,
+    "aguamarina": 6036000,
+    "amarillo": 6139000,
+    "naranja": 6242000,
+    "rojo": 6294000,
+    "rojoOsc": 6397000,
+    "parqCubierto": 34038000,
+    "parqDoble": 64980000
+  },
+  {
+    "nombre": "Lista 6",
+    "azul": 6022000,
+    "aguamarina": 6074000,
+    "amarillo": 6178000,
+    "naranja": 6281000,
+    "rojo": 6334000,
+    "rojoOsc": 6437000,
+    "parqCubierto": 34250000,
+    "parqDoble": 65383000
+  },
+  {
+    "nombre": "Lista 7",
+    "azul": 6060000,
+    "aguamarina": 6112000,
+    "amarillo": 6217000,
+    "naranja": 6320000,
+    "rojo": 6374000,
+    "rojoOsc": 6477000,
+    "parqCubierto": 34463000,
+    "parqDoble": 65789000
+  }
+]

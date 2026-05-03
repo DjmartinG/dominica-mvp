@@ -1,0 +1,68 @@
+[
+  {
+    "id": "piscina",
+    "nombre": "Piscina",
+    "descripcion": "Piscina con zona seca y ambiente caribeño",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-PSICINA-ZONA-SECA.jpg"
+  },
+  {
+    "id": "gimnasio",
+    "nombre": "Gimnasio",
+    "descripcion": "Gimnasio dotado con equipos de última generación",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/LISTO-COM-GYM-V2.jpg"
+  },
+  {
+    "id": "coworking",
+    "nombre": "Coworking",
+    "descripcion": "Espacio de coworking con conectividad y luz natural",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Coworking-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "solarium",
+    "nombre": "Terraza Solarium",
+    "descripcion": "Terraza panorámica con asoleamiento privilegiado",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/TER-TERRAZA-SOLARIUM.jpg"
+  },
+  {
+    "id": "ofuro",
+    "nombre": "Terraza Ofuro",
+    "descripcion": "Terraza con ofuro inspirada en la cultura del bienestar",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Terraza-ofuro-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "bbq",
+    "nombre": "Zona BBQ",
+    "descripcion": "Zona BBQ al aire libre para reuniones",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/zona-bbq-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "cancha",
+    "nombre": "Cancha",
+    "descripcion": "Cancha multipropósito",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Cancha-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "cine",
+    "nombre": "Sala de Cine",
+    "descripcion": "Sala de cine para uso exclusivo de residentes",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/sala-de-cine-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "juegos",
+    "nombre": "Salón de Juegos",
+    "descripcion": "Salón de juegos para todas las edades",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Salon-de-juegos-zona-social-Dominica-CG-Constructora.jpg"
+  },
+  {
+    "id": "cava",
+    "nombre": "Cava",
+    "descripcion": "Cava / vinoteca privada",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-CAVA-VISTA-3.jpg"
+  },
+  {
+    "id": "lobby",
+    "nombre": "Lobby",
+    "descripcion": "Lobby principal de doble altura",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-LOBBY.jpg"
+  }
+]

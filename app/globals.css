@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============ AQUAWAX (custom de cgconstructora.com) ============ */
+@font-face {
+  font-family: 'Aquawax';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://cgconstructora.com/wp-content/uploads/2022/08/Aquawax-Black.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Aquawax';
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  src: url('https://cgconstructora.com/wp-content/uploads/2022/08/Aquawax-Light.woff2') format('woff2');
+}
+
+/* ============ TOKENS DE DISEÑO ============ */
+:root {
+  --caribe: #006D68;
+  --caribe-dark: #004D49;
+  --caribe-light: #0E8B85;
+  --turquesa: #7BDCB5;
+  --turquesa-light: #C8F0DC;
+  --cielo: #0089F7;
+  --carbon: #222222;
+  --crema: #FAFAFA;
+  --blanco: #FFFFFF;
+  --cg-navy: #0B2545;
+  --cg-dorado: #C9A961;
+  --ok: #2E7D32;
+  --alert: #C62828;
+  --warn: #F9A825;
+}
+
+/* ============ BASE ============ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  color: var(--carbon);
+  background-color: var(--blanco);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Aquawax', var(--font-montserrat), Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* ============ COMPONENTES UTILITARIOS ============ */
+.btn-cta {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all;
+  background-color: var(--cielo);
+  box-shadow: 0 4px 12px rgba(0, 137, 247, 0.3);
+}
+.btn-cta:hover {
+  background-color: #0073D8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 137, 247, 0.4);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all;
+  background-color: var(--caribe);
+  box-shadow: 0 4px 12px rgba(0, 109, 104, 0.3);
+}
+.btn-primary:hover {
+  background-color: var(--caribe-dark);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all;
+  background-color: var(--turquesa);
+  color: var(--carbon);
+}
+.btn-secondary:hover {
+  background-color: #6BCFA8;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all border-2;
+  border-color: var(--caribe);
+  color: var(--caribe);
+  background-color: transparent;
+}
+.btn-outline:hover {
+  background-color: var(--caribe);
+  color: white;
+}
+
+.card-dominica {
+  @apply bg-white rounded-2xl p-6 transition-all;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.card-dominica:hover {
+  box-shadow: 0 8px 24px rgba(0, 109, 104, 0.12);
+}
+
+.card-amenidad {
+  @apply rounded-2xl p-6 transition-all;
+  background: var(--turquesa-light);
+}
+
+.heading-hero {
+  font-family: 'Aquawax', var(--font-montserrat), Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.slogan {
+  @apply italic font-light;
+  font-family: var(--font-roboto-slab), Georgia, serif;
+}
+
+.banner-cg {
+  background-color: var(--cg-navy);
+  border-bottom: 3px solid var(--cg-dorado);
+}
+
+.bg-hero-overlay {
+  background: linear-gradient(180deg, rgba(0, 109, 104, 0.4) 0%, rgba(0, 77, 73, 0.85) 100%);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--crema);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--turquesa);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--caribe);
+}
+
+@media print {
+  .no-print { display: none !important; }
+}
