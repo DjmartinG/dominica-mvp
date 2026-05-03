@@ -3,66 +3,98 @@
     "id": "piscina",
     "nombre": "Piscina",
     "descripcion": "Piscina con zona seca y ambiente caribeño",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-PSICINA-ZONA-SECA.jpg"
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/COM-PSICINA-ZONA-SECA.jpg",
+    "icono": "Waves"
+  },
+  {
+    "id": "piscina-vista",
+    "nombre": "Solarium Piscina",
+    "descripcion": "Solarium junto a piscina con vista al horizonte",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/COM-PISICINA-VISTA-2.jpg",
+    "icono": "Sun"
   },
   {
     "id": "gimnasio",
     "nombre": "Gimnasio",
     "descripcion": "Gimnasio dotado con equipos de última generación",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/LISTO-COM-GYM-V2.jpg"
-  },
-  {
-    "id": "coworking",
-    "nombre": "Coworking",
-    "descripcion": "Espacio de coworking con conectividad y luz natural",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Coworking-zona-social-Dominica-CG-Constructora.jpg"
-  },
-  {
-    "id": "solarium",
-    "nombre": "Terraza Solarium",
-    "descripcion": "Terraza panorámica con asoleamiento privilegiado",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/TER-TERRAZA-SOLARIUM.jpg"
-  },
-  {
-    "id": "ofuro",
-    "nombre": "Terraza Ofuro",
-    "descripcion": "Terraza con ofuro inspirada en la cultura del bienestar",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Terraza-ofuro-zona-social-Dominica-CG-Constructora.jpg"
-  },
-  {
-    "id": "bbq",
-    "nombre": "Zona BBQ",
-    "descripcion": "Zona BBQ al aire libre para reuniones",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/zona-bbq-zona-social-Dominica-CG-Constructora.jpg"
-  },
-  {
-    "id": "cancha",
-    "nombre": "Cancha",
-    "descripcion": "Cancha multipropósito",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Cancha-zona-social-Dominica-CG-Constructora.jpg"
-  },
-  {
-    "id": "cine",
-    "nombre": "Sala de Cine",
-    "descripcion": "Sala de cine para uso exclusivo de residentes",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/sala-de-cine-zona-social-Dominica-CG-Constructora.jpg"
-  },
-  {
-    "id": "juegos",
-    "nombre": "Salón de Juegos",
-    "descripcion": "Salón de juegos para todas las edades",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/Salon-de-juegos-zona-social-Dominica-CG-Constructora.jpg"
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/LISTO-COM-GYM-V2.jpg",
+    "icono": "Dumbbell"
   },
   {
     "id": "cava",
     "nombre": "Cava",
-    "descripcion": "Cava / vinoteca privada",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-CAVA-VISTA-3.jpg"
+    "descripcion": "Cava / vinoteca privada para los residentes",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/COM-CAV-V3.jpg",
+    "icono": "Wine"
   },
   {
     "id": "lobby",
     "nombre": "Lobby",
     "descripcion": "Lobby principal de doble altura",
-    "imagen": "https://cgconstructora.com/wp-content/uploads/2024/02/COM-LOBBY.jpg"
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/COM-LOBBY.jpg",
+    "icono": "Building2"
+  },
+  {
+    "id": "solarium",
+    "nombre": "Terraza Solarium",
+    "descripcion": "Terraza panorámica con asoleamiento privilegiado",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-SOLARIUM.jpg",
+    "icono": "Sun"
+  },
+  {
+    "id": "terraza-ph",
+    "nombre": "Terraza Penthouse",
+    "descripcion": "Terraza exclusiva del penthouse con vista privilegiada",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-PENTHOUSE-V3.jpg",
+    "icono": "Mountain"
+  },
+  {
+    "id": "terraza-t6",
+    "nombre": "Terraza T6",
+    "descripcion": "Terraza tipo T6 con espacios de relajación",
+    "imagen": "https://cgconstructora.com/wp-content/uploads/2025/05/TER-TERRAZA-PH-T6-V2.jpg",
+    "icono": "Trees"
+  },
+  {
+    "id": "coworking",
+    "nombre": "Coworking",
+    "descripcion": "Espacio de coworking con conectividad y luz natural",
+    "imagen": null,
+    "icono": "Briefcase"
+  },
+  {
+    "id": "bbq",
+    "nombre": "Zona BBQ",
+    "descripcion": "Zona BBQ al aire libre para reuniones",
+    "imagen": null,
+    "icono": "Flame"
+  },
+  {
+    "id": "cancha",
+    "nombre": "Cancha Multipropósito",
+    "descripcion": "Cancha multipropósito para deporte y recreación",
+    "imagen": null,
+    "icono": "Trophy"
+  },
+  {
+    "id": "cine",
+    "nombre": "Sala de Cine",
+    "descripcion": "Sala de cine para uso exclusivo de residentes",
+    "imagen": null,
+    "icono": "Film"
+  },
+  {
+    "id": "juegos",
+    "nombre": "Salón de Juegos",
+    "descripcion": "Salón de juegos para todas las edades",
+    "imagen": null,
+    "icono": "Dices"
+  },
+  {
+    "id": "ofuro",
+    "nombre": "Terraza Ofuro",
+    "descripcion": "Terraza con ofuro inspirada en la cultura del bienestar",
+    "imagen": null,
+    "icono": "Bath"
   }
 ]
