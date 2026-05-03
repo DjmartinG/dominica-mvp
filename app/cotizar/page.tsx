@@ -6,6 +6,7 @@ import { NavTop } from "@/components/NavTop";
 import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { TorreMapView } from "@/components/cotizador/TorreMapView";
 import { AptoSelector } from "@/components/cotizador/AptoSelector";
 import { ParqueaderoToggle } from "@/components/cotizador/ParqueaderoToggle";
 import { DepositoSelector } from "@/components/cotizador/DepositoSelector";
@@ -23,7 +24,7 @@ import {
   validarApto, validarDescuento, validarDeposito,
   generarNumeroCotizacion, calcularFechaVencimiento,
 } from "@/lib/cotizador";
-import { ArrowLeft, BookOpen } from "lucide-react";
+import { ArrowLeft, BookOpen, List, LayoutGrid } from "lucide-react";
 
 const SIN_DEPOSITO = (depositos as Deposito[]).find((d) => d.id === "sin")!;
 const CLIENTE_VACIO: Cliente = { nombre: "", documento: "", celular: "", email: "" };
@@ -37,6 +38,7 @@ export default function CotizarPage() {
   const [cliente, setCliente] = useState<Cliente>(CLIENTE_VACIO);
   const [asesor, setAsesor] = useState<Asesor | null>(null);
   const [guardada, setGuardada] = useState(false);
+  const [vistaSeleccion, setVistaSeleccion] = useState<"mapa" | "lista">("mapa");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -106,7 +108,6 @@ export default function CotizarPage() {
 
       <main className="bg-beige min-h-screen pt-[140px] pb-16 px-4 sm:px-6 lg:px-12 print:bg-white print:py-0">
         <div className="max-w-7xl mx-auto">
-          {/* Breadcrumbs + back link */}
           <div className="flex items-center justify-between mb-8 no-print">
             <Breadcrumbs items={[{ label: "Cotizador" }]} />
             <Link
@@ -128,17 +129,46 @@ export default function CotizarPage() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white p-8">
-                <h2 className="font-display text-2xl text-negro tracking-wide mb-6">1 · Tu apartamento</h2>
-                <div className="space-y-4">
-                  <AptoSelector selected={apto} onSelect={setApto} />
-                  {apto && (
-                    <>
-                      <ParqueaderoToggle apto={apto} incluido={conParqueadero} onToggle={setConParqueadero} />
-                      <DepositoSelector selected={deposito} onSelect={setDeposito} />
-                    </>
-                  )}
+              {/* SECCIÓN 1 — TU APARTAMENTO con vista mapa o lista */}
+              <div className="bg-white p-6 lg:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                  <h2 className="font-display text-2xl text-negro tracking-wide">1 · Tu apartamento</h2>
+                  
+                  {/* Toggle vista mapa/lista */}
+                  <div className="inline-flex bg-beige border border-gris-muyclaro p-1">
+                    <button
+                      onClick={() => setVistaSeleccion("mapa")}
+                      className={`flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.15em] uppercase font-semibold transition-colors ${
+                        vistaSeleccion === "mapa" ? "bg-navy text-white" : "text-negro hover:bg-white"
+                      }`}
+                    >
+                      <LayoutGrid className="w-3 h-3" />
+                      Mapa Torre
+                    </button>
+                    <button
+                      onClick={() => setVistaSeleccion("lista")}
+                      className={`flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.15em] uppercase font-semibold transition-colors ${
+                        vistaSeleccion === "lista" ? "bg-navy text-white" : "text-negro hover:bg-white"
+                      }`}
+                    >
+                      <List className="w-3 h-3" />
+                      Lista
+                    </button>
+                  </div>
                 </div>
+
+                {vistaSeleccion === "mapa" ? (
+                  <TorreMapView selected={apto} onSelect={setApto} />
+                ) : (
+                  <AptoSelector selected={apto} onSelect={setApto} />
+                )}
+
+                {apto && (
+                  <div className="mt-6 pt-6 border-t border-gris-muyclaro space-y-4">
+                    <ParqueaderoToggle apto={apto} incluido={conParqueadero} onToggle={setConParqueadero} />
+                    <DepositoSelector selected={deposito} onSelect={setDeposito} />
+                  </div>
+                )}
               </div>
 
               {apto && (
