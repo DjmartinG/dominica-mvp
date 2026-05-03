@@ -14,7 +14,7 @@ export function HeroCarousel() {
   }, [banners.length]);
 
   return (
-    <section id="hero" className="relative h-[calc(100vh-80px)] mt-20 overflow-hidden">
+    <section id="hero" className="relative h-[calc(100vh-120px)] mt-[120px] overflow-hidden">
       {/* Slides */}
       {banners.map((src, i) => (
         // eslint-disable-next-line @next/next/no-img-element

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { NavTop } from "@/components/NavTop";
+import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
 import asesores from "@/data/asesores.json";
 import { brand } from "@/lib/design-tokens";
@@ -27,9 +28,10 @@ export default function SalaPage() {
 
   return (
     <>
+      <TopBar />
       <NavTop />
 
-      <main className="bg-beige min-h-screen pt-32 pb-20 px-6 lg:px-12">
+      <main className="bg-beige min-h-screen pt-[140px] pb-20 px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
           <Link
             href="/"

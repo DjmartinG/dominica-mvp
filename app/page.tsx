@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NavTop } from "@/components/NavTop";
+import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
 import { brand } from "@/lib/design-tokens";
 import { ChevronDown } from "lucide-react";
@@ -33,10 +34,11 @@ export default function Home() {
   
   return (
     <>
+      <TopBar />
       <NavTop />
 
       {/* ============ HERO sin marca de agua ============ */}
-      <section className="relative h-[calc(100vh-80px)] mt-20 overflow-hidden">
+      <section className="relative h-[calc(100vh-120px)] mt-[120px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center animate-zoom-slow"
           style={{ backgroundImage: `url(${brand.assets.banners[0]})` }}
@@ -44,7 +46,7 @@ export default function Home() {
         <div className="absolute inset-0 hero-overlay-emaar" />
 
         {/* Search bar pill flotante */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-5xl bg-white rounded-full p-2 pl-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shadow-lift animate-fade-up" style={{ animationDelay: "0.3s" }}>
+        <div className="absolute bottom-12 inset-x-6 mx-auto max-w-5xl bg-white rounded-full p-2 pl-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shadow-lift animate-fade-up" style={{ animationDelay: "0.3s" }}>
           <Link href="/brochure#tipologias" className="flex-1 px-4 py-3 sm:py-2 text-xs font-medium uppercase tracking-[0.05em] text-negro hover:text-rojo transition-colors flex items-center justify-between gap-3 sm:border-r border-b sm:border-b-0 border-gris-muyclaro">
             Tipología <ChevronDown className="w-3 h-3 text-gris" />
           </Link>

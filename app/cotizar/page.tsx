@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { NavTop } from "@/components/NavTop";
+import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
 import { AptoSelector } from "@/components/cotizador/AptoSelector";
 import { ParqueaderoToggle } from "@/components/cotizador/ParqueaderoToggle";
@@ -99,9 +100,10 @@ export default function CotizarPage() {
 
   return (
     <>
+      <TopBar />
       <NavTop />
 
-      <main className="bg-beige min-h-screen pt-28 pb-16 px-4 sm:px-6 lg:px-12 print:bg-white print:py-0">
+      <main className="bg-beige min-h-screen pt-[140px] pb-16 px-4 sm:px-6 lg:px-12 print:bg-white print:py-0">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8 no-print">

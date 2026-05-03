@@ -1,4 +1,5 @@
 import { NavTop } from "@/components/NavTop";
+import { TopBar } from "@/components/TopBar";
 import { FooterDominica } from "@/components/FooterDominica";
 import { HeroCarousel } from "@/components/brochure/HeroCarousel";
 import { ElProyecto } from "@/components/brochure/ElProyecto";
@@ -11,6 +12,7 @@ import { Etapas } from "@/components/brochure/Etapas";
 export default function BrochurePage() {
   return (
     <>
+      <TopBar />
       <NavTop />
       <main>
         <HeroCarousel />

@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Video, ChevronDown } from "lucide-react";
-import { brand } from "@/lib/design-tokens";
+import { Video } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/brochure#proyecto", label: "El Proyecto" },
@@ -22,17 +21,24 @@ export function NavTop() {
   }, [open]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gris-muyclaro h-20 flex items-center px-6 lg:px-12">
+    <nav className="fixed top-10 left-0 right-0 z-50 bg-white border-b border-gris-muyclaro h-20 flex items-center px-6 lg:px-12">
       <div className="w-full flex items-center justify-between">
-        {/* Logo Dominica oficial — versión blanca invertida a negro */}
-        <Link href="/" className="block hover:opacity-70 transition-opacity">
+        {/* Logo Dominica DOMINANTE */}
+        <Link href="/" className="block hover:opacity-80 transition-opacity">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={brand.assets.logoDominicaBlanco}
+            src="/images/logos/dominica-logo.png"
             alt="Apartamentos Dominica"
-            className="h-10 lg:h-11 w-auto object-contain"
-            style={{ filter: "invert(1) brightness(0.05)" }}
+            className="h-12 lg:h-14 w-auto object-contain"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+              const sibling = (e.target as HTMLImageElement).nextElementSibling;
+              if (sibling) (sibling as HTMLElement).style.display = "block";
+            }}
           />
+          <span style={{ display: "none" }} className="font-display text-3xl font-bold text-rojo tracking-[0.15em]">
+            DOMINICA
+          </span>
         </Link>
 
         {/* Menu desktop */}
@@ -50,10 +56,6 @@ export function NavTop() {
 
         {/* Right side */}
         <div className="flex items-center gap-3 lg:gap-5">
-          <span className="hidden sm:inline-flex items-center gap-1 text-xs text-negro uppercase tracking-[0.1em] cursor-pointer">
-            ESP <ChevronDown className="w-3 h-3" />
-          </span>
-
           <a
             href="https://kuula.co/share/collection/7bPrg"
             target="_blank"
@@ -80,26 +82,20 @@ export function NavTop() {
             Cotiza ahora
           </Link>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setOpen(!open)}
             className="lg:hidden w-10 h-10 flex items-center justify-center text-negro"
             aria-label="Menu"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M3 6h18M3 12h18M3 18h18" />
-              )}
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile menu drawer */}
       {open && (
-        <div className="lg:hidden fixed inset-0 top-20 bg-white z-40 flex flex-col p-8">
+        <div className="lg:hidden fixed inset-0 top-[120px] bg-white z-40 flex flex-col p-8">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
