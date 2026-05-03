@@ -8,52 +8,55 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        caribe: {
-          DEFAULT: "#006D68",
-          dark: "#004D49",
-          light: "#0E8B85",
+        // Paleta Emaar adaptada para Dominica
+        navy: {
+          DEFAULT: "#1B2D5C",
+          dark: "#0F1B3D",
+          light: "#2A3F73",
         },
-        turquesa: {
-          DEFAULT: "#7BDCB5",
-          light: "#C8F0DC",
+        rojo: {
+          DEFAULT: "#C7141C",
+          dark: "#A1100E",
+          light: "#E62E2E",
         },
-        cielo: "#0089F7",
-        carbon: "#222222",
-        crema: "#FAFAFA",
-        cg: {
-          navy: "#0B2545",
-          dorado: "#C9A961",
+        beige: {
+          DEFAULT: "#F5F2EC",
+          dark: "#E8E2D5",
         },
+        negro: {
+          DEFAULT: "#1A1A1A",
+          soft: "#2A2A2A",
+        },
+        gris: {
+          DEFAULT: "#6E6E6E",
+          claro: "#B8B8B8",
+          muyclaro: "#E8E8E8",
+        },
+        // Mantenemos algunos para compatibilidad y semáforos
         ok: "#2E7D32",
         alert: "#C62828",
         warn: "#F9A825",
       },
       fontFamily: {
-        // Display elegante para hero y H1 (Playfair = serif premium)
-        display: ["var(--font-lora)", "Aquawax", "Georgia", "serif"],
-        // Serif decorativo
-        serif: ["var(--font-lora)", "Georgia", "serif"],
-        // Sans-serif moderno para body
-        sans: ["var(--font-roboto)", "Arial", "sans-serif"],
-        // Headers de sección
-        heading: ["var(--font-lora)", "Georgia", "serif"],
-        // Slab para subtítulos decorativos
-        slab: ["var(--font-roboto-slab)", "Georgia", "serif"],
+        display: ["var(--font-cormorant)", "Georgia", "serif"],
+        serif: ["var(--font-cormorant)", "Georgia", "serif"],
+        sans: ["var(--font-inter)", "Arial", "sans-serif"],
       },
       fontSize: {
-        hero: ["clamp(3rem, 7vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        h1: ["clamp(2rem, 4vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.015em" }],
-        h2: ["clamp(1.5rem, 3vw, 2rem)", { lineHeight: "1.25" }],
-        statement: ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1", letterSpacing: "-0.02em" }],
+        watermark: ["clamp(4rem, 12vw, 11rem)", { lineHeight: "0.9", letterSpacing: "0.05em" }],
+        display: ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.2", letterSpacing: "0.02em" }],
+        h1: ["clamp(2rem, 3.5vw, 3rem)", { lineHeight: "1.2" }],
+        h2: ["clamp(1.5rem, 2.5vw, 2rem)", { lineHeight: "1.3" }],
+        eyebrow: ["11px", { letterSpacing: "0.3em", lineHeight: "1.5" }],
       },
-      backgroundImage: {
-        'caribe-gradient': 'linear-gradient(135deg, #006D68 0%, #004D49 100%)',
-        'turquesa-fade': 'linear-gradient(180deg, #7BDCB5 0%, #C8F0DC 100%)',
+      letterSpacing: {
+        widest2: "0.3em",
+        widest3: "0.5em",
       },
       boxShadow: {
-        'caribe': '0 8px 24px rgba(0, 109, 104, 0.15)',
-        'card': '0 4px 12px rgba(0, 0, 0, 0.08)',
-        'lift': '0 20px 40px -12px rgba(0, 109, 104, 0.25)',
+        'card': '0 8px 24px rgba(0, 0, 0, 0.08)',
+        'lift': '0 20px 60px rgba(0, 0, 0, 0.15)',
+        'navy': '0 8px 24px rgba(27, 45, 92, 0.2)',
       },
       transitionDuration: {
         '400': '400ms',

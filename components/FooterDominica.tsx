@@ -1,81 +1,67 @@
 import { brand } from "@/lib/design-tokens";
-import { MessageCircle, Instagram, Globe, MapPin } from "lucide-react";
+import Link from "next/link";
 
 export function FooterDominica() {
   return (
-    <footer className="bg-cg-navy text-white border-t-4 border-cg-dorado">
-      <div className="max-w-7xl mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Col 1 — Empresa */}
-          <div>
-            <h3 className="text-cg-dorado font-display text-lg mb-3 tracking-wide">
-              {brand.empresa.razonSocial}
-            </h3>
-            <p className="text-sm text-white/80 mb-1">NIT {brand.empresa.nit}</p>
-            <p className="text-sm text-white/80 mb-1 italic">{brand.empresa.fraseCorporativa}</p>
-            <p className="text-xs text-white/60 mt-3">
-              Fiduciaria: {brand.fiduciaria}<br/>
-              Crédito constructor: {brand.creditoConstructor}<br/>
-              Certificación: {brand.proyecto.certificacion}
+    <footer className="bg-negro text-white pt-20 pb-8 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 pb-16 border-b border-white/15">
+          {/* Brand: logo blanco oficial */}
+          <div className="lg:col-span-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={brand.assets.logoDominicaBlanco}
+              alt="Apartamentos Dominica"
+              className="h-12 w-auto object-contain mb-5"
+            />
+            <p className="text-xs text-gris-claro leading-relaxed">
+              Apartamentos NO VIS Premium<br/>
+              {brand.proyecto.direccion}<br/><br/>
+              {brand.empresa.razonSocial}<br/>
+              NIT {brand.empresa.nit}<br/><br/>
+              <em className="text-rojo italic">{brand.empresa.fraseCorporativa}</em>
             </p>
           </div>
 
-          {/* Col 2 — Proyecto */}
+          {/* Proyecto */}
           <div>
-            <h3 className="text-cg-dorado font-display text-lg mb-3 tracking-wide">
-              {brand.proyecto.nombreCompleto}
-            </h3>
-            <p className="text-sm text-white/80 flex items-start gap-2 mb-2">
-              <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-cg-dorado" />
-              <span>{brand.proyecto.direccion}</span>
-            </p>
-            <p className="text-xs text-white/60">
-              {brand.proyecto.estructura} · {brand.proyecto.categoria}
-            </p>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase mb-6">Proyecto</h4>
+            <ul className="space-y-3">
+              <li><Link href="/brochure#proyecto" className="text-sm text-gris-claro hover:text-rojo transition-colors">El Proyecto</Link></li>
+              <li><Link href="/brochure#tipologias" className="text-sm text-gris-claro hover:text-rojo transition-colors">Tipologías</Link></li>
+              <li><Link href="/brochure#amenidades" className="text-sm text-gris-claro hover:text-rojo transition-colors">Amenidades</Link></li>
+              <li><Link href="/brochure#recorrido" className="text-sm text-gris-claro hover:text-rojo transition-colors">Recorrido 360°</Link></li>
+              <li><Link href="/brochure#etapas" className="text-sm text-gris-claro hover:text-rojo transition-colors">Etapas</Link></li>
+            </ul>
           </div>
 
-          {/* Col 3 — Contacto */}
+          {/* Contacto */}
           <div>
-            <h3 className="text-cg-dorado font-display text-lg mb-3 tracking-wide">Contacto</h3>
-            <div className="space-y-2 text-sm text-white/80">
-              <a
-                href={`https://wa.me/${brand.contacto.whatsappDigits}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-turquesa transition-colors"
-              >
-                <MessageCircle className="w-4 h-4 text-cg-dorado" />
-                {brand.contacto.whatsapp}
-              </a>
-              <a
-                href={`https://instagram.com/${brand.contacto.instagram.replace("@", "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-turquesa transition-colors"
-              >
-                <Instagram className="w-4 h-4 text-cg-dorado" />
-                {brand.contacto.instagram}
-              </a>
-              <a
-                href={`https://${brand.contacto.web}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-turquesa transition-colors"
-              >
-                <Globe className="w-4 h-4 text-cg-dorado" />
-                {brand.contacto.web}
-              </a>
-            </div>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase mb-6">Contacto</h4>
+            <ul className="space-y-3">
+              <li><a href={`https://wa.me/${brand.contacto.whatsappDigits}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gris-claro hover:text-rojo transition-colors">{brand.contacto.whatsapp}</a></li>
+              <li><a href={`https://instagram.com/${brand.contacto.instagram.replace("@","")}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gris-claro hover:text-rojo transition-colors">{brand.contacto.instagram}</a></li>
+              <li><Link href="/cotizar" className="text-sm text-gris-claro hover:text-rojo transition-colors">Cotizar online</Link></li>
+              <li><Link href="/sala" className="text-sm text-gris-claro hover:text-rojo transition-colors">Sala de ventas</Link></li>
+            </ul>
+          </div>
+
+          {/* Aliados */}
+          <div>
+            <h4 className="text-xs font-semibold tracking-[0.2em] uppercase mb-6">Aliados</h4>
+            <ul className="space-y-3">
+              <li className="text-sm text-gris-claro">{brand.fiduciaria}</li>
+              <li className="text-sm text-gris-claro">Crédito {brand.creditoConstructor}</li>
+              <li className="text-sm text-gris-claro">Certificación {brand.proyecto.certificacion}</li>
+              <li className="text-sm text-gris-claro">Socio comercial {brand.socio}</li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-cg-dorado/30 pt-4 text-center text-xs text-white/50">
-          <p>© {new Date().getFullYear()} {brand.empresa.razonSocial}. Todos los derechos reservados.</p>
-          <p className="mt-1">
-            Las imágenes son representación ilustrativa del proyecto. Sujetas a modificaciones.
-            Precios sujetos a cambios sin previo aviso.
-          </p>
+        <div className="mt-8 flex flex-col md:flex-row justify-between gap-3 text-[11px] tracking-[0.15em] uppercase text-gris-claro">
+          <p>© {new Date().getFullYear()} CG CONSTRUCTORA · TODOS LOS DERECHOS RESERVADOS</p>
+          <p>IMÁGENES ILUSTRATIVAS · SUJETAS A MODIFICACIÓN</p>
         </div>
       </div>
     </footer>

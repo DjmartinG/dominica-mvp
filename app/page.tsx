@@ -1,137 +1,160 @@
 import Link from "next/link";
-import { BannerCG } from "@/components/BannerCG";
+import { NavTop } from "@/components/NavTop";
 import { FooterDominica } from "@/components/FooterDominica";
-import { LogoDominica } from "@/components/Logos";
 import { brand } from "@/lib/design-tokens";
-import { ChevronRight, Home as HomeIcon, Briefcase } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import apartamentos from "@/data/apartamentos.json";
+
+interface Apto {
+  numero: string;
+  tipologia: string;
+  areaVendible: number;
+  estado: string;
+  valorApartamento: number;
+}
+
+function formatCOP(v: number) {
+  return new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(v);
+}
+function formatM(v: number) {
+  if (v >= 1000000000) return `$${(v / 1000000000).toFixed(2).replace(/\.?0+$/, "")}MM`;
+  if (v >= 1000000) return `$${Math.round(v / 1000000)}M`;
+  return formatCOP(v);
+}
+
+const TIPOLOGIAS_HERO = [
+  { tipo: "FLAT HOUSE", tag: "Más buscado", area: 92, img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo1.jpg" },
+  { tipo: "BALCONY", tag: "Vista panorámica", area: 75, img: "https://cgconstructora.com/wp-content/uploads/2024/09/tipo2.jpg" },
+  { tipo: "PRESTIGE 117", tag: "Edición Limitada", area: 130, img: "https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-SALA-V3.jpg" },
+];
 
 export default function Home() {
+  const aptos = apartamentos as Apto[];
+  
   return (
     <>
-      <BannerCG ghost />
+      <NavTop />
 
-      <main className="flex-1 relative overflow-hidden">
-        {/* Hero con render de fondo */}
-        <section
-          className="relative min-h-screen flex items-center justify-center"
-          style={{
-            backgroundImage: `url(${brand.assets.banners[0]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {/* Overlay verde caribe sutil */}
-          <div className="absolute inset-0 bg-hero-overlay" />
+      {/* ============ HERO sin marca de agua ============ */}
+      <section className="relative h-[calc(100vh-80px)] mt-20 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center animate-zoom-slow"
+          style={{ backgroundImage: `url(${brand.assets.banners[0]})` }}
+        />
+        <div className="absolute inset-0 hero-overlay-emaar" />
 
-          {/* Contenido */}
-          <div className="relative z-10 text-center px-6 py-20 max-w-5xl mx-auto animate-fade-in-up">
-            {/* Logo Dominica */}
-            <div className="flex justify-center mb-6">
-              <LogoDominica variant="white" size="md" />
-            </div>
+        {/* Search bar pill flotante */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-5xl bg-white rounded-full p-2 pl-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shadow-lift animate-fade-up" style={{ animationDelay: "0.3s" }}>
+          <Link href="/brochure#tipologias" className="flex-1 px-4 py-3 sm:py-2 text-xs font-medium uppercase tracking-[0.05em] text-negro hover:text-rojo transition-colors flex items-center justify-between gap-3 sm:border-r border-b sm:border-b-0 border-gris-muyclaro">
+            Tipología <ChevronDown className="w-3 h-3 text-gris" />
+          </Link>
+          <button className="flex-1 px-4 py-3 sm:py-2 text-xs font-medium uppercase tracking-[0.05em] text-negro hover:text-rojo transition-colors flex items-center justify-between gap-3 sm:border-r border-b sm:border-b-0 border-gris-muyclaro">
+            Torre <ChevronDown className="w-3 h-3 text-gris" />
+          </button>
+          <button className="flex-1 px-4 py-3 sm:py-2 text-xs font-medium uppercase tracking-[0.05em] text-negro hover:text-rojo transition-colors flex items-center justify-between gap-3 sm:border-r border-b sm:border-b-0 border-gris-muyclaro">
+            Rango precio <ChevronDown className="w-3 h-3 text-gris" />
+          </button>
+          <button className="flex-1 px-4 py-3 sm:py-2 text-xs font-medium uppercase tracking-[0.05em] text-negro hover:text-rojo transition-colors flex items-center justify-between gap-3">
+            Disponibilidad <ChevronDown className="w-3 h-3 text-gris" />
+          </button>
+          <Link href="/cotizar" className="btn-pill">Buscar Apartamentos</Link>
+        </div>
+      </section>
 
-            {/* H1 — serif Lora elegante */}
-            <h1 className="heading-hero text-white mb-6">
-              Apartamentos Dominica
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-turquesa text-base md:text-lg font-light mb-8 tracking-[0.25em] uppercase">
-              Pereira · 5 torres × 6 pisos · NO VIS Premium
+      {/* ============ PROPERTIES GRID ============ */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="section-title mb-6">
+              Apartamentos Premium en Pereira
+            </h2>
+            <p className="text-gris max-w-2xl mx-auto leading-relaxed">
+              Descubre las distribuciones únicas de Dominica. Cada apartamento de 2 alcobas + espacio multifuncional, diseñado para quienes buscan calidad de vida con identidad caribeña.
             </p>
+          </div>
 
-            {/* Slogan con italics parcial premium */}
-            <p className="slogan text-white/95 text-lg md:text-2xl max-w-3xl mx-auto mb-14 leading-relaxed">
-              Imagina despertar cada día rodeado de la tranquilidad, el diseño y la frescura de una{" "}
-              <em>isla caribeña</em>, sin salir de la ciudad.
-            </p>
-
-            {/* Selector de modo — outline ghost premium */}
-            <div className="max-w-3xl mx-auto">
-              <p className="text-white/70 text-xs uppercase tracking-[0.4em] mb-6 font-light">
-                ─── Comencemos ───
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Modo Sala — outline */}
-                <Link
-                  href="/sala"
-                  className="group bg-white/5 hover:bg-white backdrop-blur-md border border-white/30 hover:border-white rounded-2xl p-6 text-left transition-all duration-400 flex items-start gap-4"
-                >
-                  <div className="border border-white/40 group-hover:border-caribe group-hover:bg-caribe text-white group-hover:text-white p-3 rounded-xl transition-all duration-400">
-                    <Briefcase className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display text-white group-hover:text-caribe text-2xl mb-1 transition-colors duration-400">
-                      Modo Sala
-                    </h3>
-                    <p className="text-white/70 group-hover:text-carbon/70 text-sm mb-3 transition-colors duration-400">
-                      Para asesores comerciales. Tour guiado + cotizador.
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-turquesa group-hover:text-cielo font-semibold text-sm transition-colors duration-400">
-                      Ingresar como asesor
-                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-400" />
-                    </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {TIPOLOGIAS_HERO.map((t) => {
+              const matches = aptos.filter((a) => a.tipologia === t.tipo && a.estado === "Disponible");
+              const minPrecio = matches.length > 0 ? Math.min(...matches.map((a) => a.valorApartamento)) : 0;
+              return (
+                <Link key={t.tipo} href={`/cotizar?tipo=${t.tipo}`} className="card-emaar">
+                  <div
+                    className="w-full aspect-[4/3] bg-cover bg-center mb-6"
+                    style={{ backgroundImage: `url(${t.img})` }}
+                  />
+                  <p className="eyebrow mb-2">{t.tag}</p>
+                  <h3 className="font-display text-3xl text-negro mb-2 tracking-wide">{t.tipo}</h3>
+                  <p className="text-sm text-gris mb-4 tracking-wide">Torre 4 · 2 alcobas + multifuncional</p>
+                  <div className="flex gap-6 pt-4 border-t border-gris-muyclaro text-xs">
+                    <div>
+                      <strong className="font-display text-rojo text-lg block">{matches.length}</strong>
+                      <span className="text-negro">Disponibles</span>
+                    </div>
+                    <div>
+                      <strong className="font-display text-rojo text-lg block">{t.area}m²</strong>
+                      <span className="text-negro">Área típica</span>
+                    </div>
+                    <div>
+                      <strong className="font-display text-rojo text-lg block">{formatM(minPrecio)}</strong>
+                      <span className="text-negro">Desde</span>
+                    </div>
                   </div>
                 </Link>
-
-                {/* Modo Web — outline */}
-                <Link
-                  href="/brochure"
-                  className="group bg-white/5 hover:bg-white backdrop-blur-md border border-white/30 hover:border-white rounded-2xl p-6 text-left transition-all duration-400 flex items-start gap-4"
-                >
-                  <div className="border border-white/40 group-hover:border-cielo group-hover:bg-cielo text-white group-hover:text-white p-3 rounded-xl transition-all duration-400">
-                    <HomeIcon className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display text-white group-hover:text-caribe text-2xl mb-1 transition-colors duration-400">
-                      Modo Web
-                    </h3>
-                    <p className="text-white/70 group-hover:text-carbon/70 text-sm mb-3 transition-colors duration-400">
-                      Explora el proyecto y autocotiza tu apartamento.
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-turquesa group-hover:text-cielo font-semibold text-sm transition-colors duration-400">
-                      Ver el proyecto
-                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-400" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
-
-              <p className="text-white/60 text-xs mt-8 tracking-widest">
-                Desde {new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(brand.proyecto.precioDesde)} · Certificación {brand.proyecto.certificacion}
-              </p>
-            </div>
+              );
+            })}
           </div>
 
-          {/* Hint scroll */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/60 text-xs uppercase tracking-[0.3em] animate-pulse z-10">
-            ↓ Conoce el proyecto
+          <div className="text-center mt-16">
+            <Link href="/brochure#tipologias" className="btn-link">Ver todas las tipologías</Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Strip stats — números grandes statement */}
-        <section className="bg-gradient-to-r from-turquesa-light via-turquesa to-turquesa-light py-16 md:py-20 px-6">
-          <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="animate-fade-in-up">
-              <p className="statement-number">5</p>
-              <p className="text-xs uppercase text-caribe-dark/70 tracking-[0.25em] font-semibold mt-3">Torres</p>
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-              <p className="statement-number">6</p>
-              <p className="text-xs uppercase text-caribe-dark/70 tracking-[0.25em] font-semibold mt-3">Pisos por torre</p>
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <p className="statement-number">14+</p>
-              <p className="text-xs uppercase text-caribe-dark/70 tracking-[0.25em] font-semibold mt-3">Amenidades</p>
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-              <p className="statement-number">EDGE</p>
-              <p className="text-xs uppercase text-caribe-dark/70 tracking-[0.25em] font-semibold mt-3">Certificación</p>
-            </div>
+      {/* ============ FEATURED — El Proyecto ============ */}
+      <section className="py-24 lg:py-32 px-6 lg:px-12 bg-beige">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <div
+            className="aspect-[4/5] bg-cover bg-center shadow-card"
+            style={{ backgroundImage: `url(${brand.assets.renders[0]})` }}
+          />
+          <div>
+            <p className="eyebrow mb-6">El Proyecto</p>
+            <h2 className="font-display text-display text-negro mb-8 leading-tight">
+              Vive la esencia del Caribe en el corazón de Pereira
+            </h2>
+            <p className="text-base text-gris leading-relaxed mb-6">
+              <strong className="text-negro">Apartamentos Dominica</strong> es un proyecto inspirado en el encanto tropical, donde la arquitectura y la naturaleza se fusionan para ofrecerte un hogar que respira bienestar y sofisticación.
+            </p>
+            <p className="text-base text-gris leading-relaxed mb-6">
+              Con certificación <strong className="text-negro">EDGE</strong>, eficiencia energética y sostenibilidad como pilares del diseño que fluye con el entorno.
+            </p>
+            <Link href="/brochure" className="btn-link mt-4">Conocer el proyecto</Link>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* ============ STATS BAND NAVY ============ */}
+      <section className="py-20 px-6 lg:px-12 bg-navy text-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div className="text-center px-6 lg:border-r border-white/15">
+            <p className="stat-number-serif text-white mb-3">5</p>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-white/70">Torres</p>
+          </div>
+          <div className="text-center px-6 lg:border-r border-white/15">
+            <p className="stat-number-serif text-white mb-3">6</p>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-white/70">Pisos por torre</p>
+          </div>
+          <div className="text-center px-6 lg:border-r border-white/15">
+            <p className="stat-number-serif text-white mb-3">14<span className="text-[0.5em]">+</span></p>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-white/70">Amenidades</p>
+          </div>
+          <div className="text-center px-6">
+            <p className="stat-number-serif text-white mb-3" style={{fontSize: "clamp(2rem, 3.5vw, 3rem)", paddingTop: "0.5rem"}}>EDGE</p>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-white/70">Certificación</p>
+          </div>
+        </div>
+      </section>
 
       <FooterDominica />
     </>

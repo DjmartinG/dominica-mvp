@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { BannerCG } from "@/components/BannerCG";
+import { NavTop } from "@/components/NavTop";
 import { FooterDominica } from "@/components/FooterDominica";
-import { LogoDominica } from "@/components/Logos";
 import asesores from "@/data/asesores.json";
 import { brand } from "@/lib/design-tokens";
 import { ArrowLeft, ChevronRight, User } from "lucide-react";
@@ -28,59 +27,52 @@ export default function SalaPage() {
 
   return (
     <>
-      <BannerCG ghost={false} />
+      <NavTop />
 
-      <main className="flex-1 bg-gradient-to-br from-crema to-turquesa-light pt-32 pb-20 px-6">
+      <main className="bg-beige min-h-screen pt-32 pb-20 px-6 lg:px-12">
         <div className="max-w-3xl mx-auto">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-caribe hover:text-caribe-dark mb-6 font-semibold"
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.15em] text-negro hover:text-rojo mb-8 uppercase transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver
           </Link>
 
-          <div className="card-dominica">
-            <div className="flex items-center gap-4 mb-6">
-              <LogoDominica variant="color" size="md" />
-              <div className="flex-1">
-                <p className="text-xs uppercase tracking-[0.3em] text-cg-dorado font-semibold">
-                  Modo Sala
-                </p>
-                <h1 className="font-display text-4xl text-caribe">
-                  Bienvenido, asesor
-                </h1>
-              </div>
+          <div className="bg-white shadow-card p-8 lg:p-12">
+            <div className="text-center mb-10">
+              <p className="eyebrow mb-4">Modo Sala</p>
+              <h1 className="font-display text-3xl lg:text-4xl text-negro tracking-wide mb-3">
+                Bienvenido, asesor
+              </h1>
+              <p className="text-gris text-sm leading-relaxed">
+                Selecciona tu nombre para iniciar el tour con el cliente. Tu información quedará asociada a la cotización al final del proceso.
+              </p>
             </div>
 
-            <p className="text-carbon mb-6 leading-relaxed">
-              Selecciona tu nombre para iniciar el tour con el cliente. Tu información quedará asociada
-              automáticamente a la cotización al final del proceso.
-            </p>
-
-            <div className="space-y-2 mb-6">
-              <label className="text-xs font-semibold uppercase tracking-[0.25em] text-caribe">
+            <div className="mb-8">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-rojo mb-4">
                 Asesor comercial
-              </label>
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {asesores.map((a) => (
                   <button
                     key={a.codigo}
                     onClick={() => setSelectedCode(a.codigo)}
-                    className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all duration-400 text-left ${
+                    className={`flex items-center gap-3 p-4 border transition-all duration-300 text-left ${
                       selectedCode === a.codigo
-                        ? "border-caribe bg-caribe text-white shadow-caribe"
-                        : "border-turquesa-light bg-white hover:border-caribe/50"
+                        ? "border-navy bg-navy text-white"
+                        : "border-gris-muyclaro bg-white hover:border-navy"
                     }`}
                   >
-                    <div className={`p-2 rounded-lg ${selectedCode === a.codigo ? "bg-white/20" : "bg-turquesa-light"}`}>
-                      <User className={`w-5 h-5 ${selectedCode === a.codigo ? "text-white" : "text-caribe"}`} />
+                    <div className={`w-10 h-10 flex items-center justify-center ${selectedCode === a.codigo ? "bg-white/15" : "bg-beige"}`}>
+                      <User className={`w-5 h-5 ${selectedCode === a.codigo ? "text-white" : "text-rojo"}`} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`font-semibold truncate ${selectedCode === a.codigo ? "text-white" : "text-carbon"}`}>
+                      <p className={`font-semibold truncate text-sm ${selectedCode === a.codigo ? "text-white" : "text-negro"}`}>
                         {a.nombre}
                       </p>
-                      <p className={`text-xs truncate ${selectedCode === a.codigo ? "text-white/80" : "text-carbon/60"}`}>
+                      <p className={`text-[11px] truncate tracking-wider uppercase ${selectedCode === a.codigo ? "text-white/70" : "text-gris"}`}>
                         {a.email}
                       </p>
                     </div>
@@ -92,14 +84,14 @@ export default function SalaPage() {
             <button
               onClick={handleStart}
               disabled={!selectedCode}
-              className="btn-cta w-full disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="btn-cta w-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Iniciar tour con cliente
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
 
-            <p className="text-xs text-carbon/60 text-center mt-4 italic">
-              Datos del proyecto: {brand.proyecto.direccion} · {brand.proyecto.estructura}
+            <p className="text-[10px] tracking-[0.2em] uppercase text-gris/70 text-center mt-6">
+              {brand.proyecto.direccion} · {brand.proyecto.estructura}
             </p>
           </div>
         </div>

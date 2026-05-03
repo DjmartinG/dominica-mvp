@@ -2,206 +2,190 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============ AQUAWAX (mantener para uso secundario) ============ */
-@font-face {
-  font-family: 'Aquawax';
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://cgconstructora.com/wp-content/uploads/2022/08/Aquawax-Black.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Aquawax';
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-  src: url('https://cgconstructora.com/wp-content/uploads/2022/08/Aquawax-Light.woff2') format('woff2');
-}
-
-/* ============ TOKENS DE DISEÑO ============ */
+/* ============ TOKENS — PALETA EMAAR ============ */
 :root {
-  --caribe: #006D68;
-  --caribe-dark: #004D49;
-  --caribe-light: #0E8B85;
-  --turquesa: #7BDCB5;
-  --turquesa-light: #C8F0DC;
-  --cielo: #0089F7;
-  --carbon: #222222;
-  --crema: #FAFAFA;
+  --navy: #1B2D5C;
+  --navy-dark: #0F1B3D;
+  --rojo: #C7141C;
+  --rojo-dark: #A1100E;
+  --beige: #F5F2EC;
+  --beige-dark: #E8E2D5;
+  --negro: #1A1A1A;
   --blanco: #FFFFFF;
-  --cg-navy: #0B2545;
-  --cg-dorado: #C9A961;
-  --ok: #2E7D32;
-  --alert: #C62828;
-  --warn: #F9A825;
+  --gris: #6E6E6E;
+  --gris-claro: #B8B8B8;
+  --gris-muyclaro: #E8E8E8;
 }
 
-/* ============ BASE ============ */
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
-  color: var(--carbon);
-  background-color: var(--blanco);
+  background: var(--blanco);
+  color: var(--negro);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* H1-H4 ahora con Playfair Display por default */
 h1, h2, h3, h4 {
-  font-family: var(--font-lora), 'Aquawax', 'Georgia', serif;
-  letter-spacing: -0.015em;
+  font-family: var(--font-cormorant), 'Georgia', serif;
   font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-/* ============ COMPONENTES UTILITARIOS ============ */
+/* ============ COMPONENTES UTILITARIOS EMAAR ============ */
+
+/* Botón CTA principal navy */
 .btn-cta {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-400;
-  background-color: var(--cielo);
-  box-shadow: 0 4px 12px rgba(0, 137, 247, 0.3);
+  @apply inline-flex items-center justify-center gap-3 px-7 py-4 font-semibold text-white transition-all duration-300;
+  background: var(--navy);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 .btn-cta:hover {
-  background-color: #0073D8;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 137, 247, 0.4);
+  background: var(--navy-dark);
 }
 
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-400;
-  background-color: var(--caribe);
-  box-shadow: 0 4px 12px rgba(0, 109, 104, 0.3);
+/* Botón CTA pill (en search bar etc) */
+.btn-pill {
+  @apply inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold text-white transition-all duration-300 rounded-full;
+  background: var(--navy);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-.btn-primary:hover {
-  background-color: var(--caribe-dark);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-400;
-  background-color: var(--turquesa);
-  color: var(--carbon);
-}
-.btn-secondary:hover {
-  background-color: #6BCFA8;
+.btn-pill:hover {
+  background: var(--navy-dark);
 }
 
-.btn-outline {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-400 border-2;
-  border-color: var(--caribe);
-  color: var(--caribe);
-  background-color: transparent;
-}
-.btn-outline:hover {
-  background-color: var(--caribe);
-  color: white;
-}
-
-.card-dominica {
-  @apply bg-white rounded-2xl p-6 transition-all duration-400;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-.card-dominica:hover {
-  box-shadow: 0 12px 32px rgba(0, 109, 104, 0.15);
-  transform: translateY(-2px);
-}
-
-.card-amenidad {
-  @apply rounded-2xl p-6 transition-all duration-400;
-  background: var(--turquesa-light);
-}
-
-/* === Hero heading premium con Playfair === */
-.heading-hero {
-  font-family: var(--font-lora), 'Aquawax', 'Georgia', serif;
+/* Botón ghost outline */
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-3 px-7 py-4 transition-all duration-300 border;
+  border-color: var(--negro);
+  color: var(--negro);
+  background: transparent;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   font-weight: 500;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+}
+.btn-ghost:hover {
+  background: var(--negro);
+  color: var(--blanco);
 }
 
-.heading-hero em {
-  font-style: italic;
+/* Botón link arrow */
+.btn-link {
+  @apply inline-flex items-center gap-3 py-4 transition-all duration-300;
+  color: var(--negro);
+  border-bottom: 2px solid var(--rojo);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-link::after {
+  content: '→';
+  font-size: 16px;
+  transition: transform 0.3s;
+}
+.btn-link:hover::after {
+  transform: translateX(6px);
+}
+
+/* Eyebrow estilo Emaar */
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rojo);
+  font-weight: 600;
+}
+.eyebrow-light {
+  color: var(--gris);
+}
+
+/* Section title */
+.section-title {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: 0.05em;
+  color: var(--negro);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* Card minimal */
+.card-emaar {
+  @apply bg-white transition-all duration-400 cursor-pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card-emaar:hover {
+  transform: translateY(-8px);
+}
+
+/* Hero watermark */
+.hero-watermark {
+  font-family: var(--font-cormorant), serif;
   font-weight: 400;
+  font-size: clamp(4rem, 12vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Slogan italic premium */
-.slogan {
-  font-family: var(--font-lora), 'Georgia', serif;
+/* Overlay sutil estilo Emaar */
+.hero-overlay-emaar {
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Stats number serif */
+.stat-number-serif {
+  font-family: var(--font-cormorant), serif;
   font-weight: 400;
-  font-style: normal;
-}
-
-.slogan em {
-  font-style: italic;
-  color: var(--turquesa);
-}
-
-/* Banner CG navy con dorado */
-.banner-cg {
-  background-color: var(--cg-navy);
-  border-bottom: 1px solid rgba(201, 169, 97, 0.4);
-}
-
-/* Hero overlay MÁS SUTIL (25% en vez de 40-85%) */
-.bg-hero-overlay {
-  background: linear-gradient(180deg, rgba(0, 109, 104, 0.15) 0%, rgba(0, 77, 73, 0.55) 100%);
-}
-
-/* Statement number (datos numéricos grandes premium) */
-.statement-number {
-  font-family: var(--font-lora), 'Georgia', serif;
-  font-weight: 700;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(3rem, 5vw, 4.5rem);
   line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--caribe-dark);
+  letter-spacing: 0.02em;
 }
 
 /* Animaciones */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes zoomSlow {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+  50% { transform: translate(-50%, 8px); opacity: 1; }
 }
 
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
+.animate-fade-up { animation: fadeUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; opacity: 0; }
+.animate-zoom-slow { animation: zoomSlow 20s ease-out infinite alternate; }
+.animate-bounce-soft { animation: bounce 2s infinite; }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--crema);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--turquesa);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--caribe);
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--gris-muyclaro); }
+::-webkit-scrollbar-thumb { background: var(--navy); }
+::-webkit-scrollbar-thumb:hover { background: var(--navy-dark); }
 
+/* Print */
 @media print {
   .no-print { display: none !important; }
 }

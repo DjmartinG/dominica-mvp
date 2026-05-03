@@ -1,32 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Roboto, Montserrat, Roboto_Slab, Lora } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-const roboto = Roboto({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
-
-const robotoSlab = Roboto_Slab({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-roboto-slab",
-  display: "swap",
-});
-
-const lora = Lora({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-lora",
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -40,7 +27,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#006D68",
+  themeColor: "#1B2D5C",
 };
 
 export default function RootLayout({
@@ -49,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${roboto.variable} ${montserrat.variable} ${robotoSlab.variable} ${lora.variable}`}>
-      <body className={`${roboto.className} min-h-screen flex flex-col antialiased`}>
+    <html lang="es" className={`${inter.variable} ${cormorant.variable}`}>
+      <body className={`${inter.className} min-h-screen flex flex-col antialiased bg-white text-negro`}>
         {children}
       </body>
     </html>

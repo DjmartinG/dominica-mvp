@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartamentos Dominica · Estilo Emaar Premium</title>
+  
+  <!-- Google Fonts: Cormorant Garamond (serif Bodoni-like, igual Emaar) + Inter (sans premium) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============ TOKENS — PALETA EMAAR PREMIUM ============ */
+    :root {
+      --negro: #0A0A0A;
+      --negro-soft: #1A1A1A;
+      --blanco: #FAFAF8;
+      --blanco-puro: #FFFFFF;
+      --dorado: #B8A372;
+      --dorado-claro: #D4C5A0;
+      --dorado-oscuro: #8B7A55;
+      --crema: #E8E4DD;
+      --gris: #8C8C8C;
+      --gris-claro: #C8C5BE;
+      --linea: rgba(184, 163, 114, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--negro);
+      color: var(--crema);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+
+    /* ============ NAV TOP — GHOST ============ */
+    .nav-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-top.scrolled {
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(20px);
+      padding: 16px 48px;
+      border-bottom: 1px solid var(--linea);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      color: var(--blanco);
+      text-transform: uppercase;
+    }
+    .nav-logo span {
+      color: var(--dorado);
+      font-style: italic;
+      font-weight: 300;
+    }
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-link {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--blanco);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    .nav-link:hover {
+      color: var(--dorado);
+    }
+    .nav-button {
+      padding: 14px 28px;
+      border: 1px solid var(--dorado);
+      background: transparent;
+      color: var(--blanco);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+    }
+    .nav-button:hover {
+      background: var(--dorado);
+      color: var(--negro);
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/banner.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: zoomSlow 20s ease-out infinite alternate;
+    }
+    @keyframes zoomSlow {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(10, 10, 10, 0.3) 0%,
+        rgba(10, 10, 10, 0.55) 60%,
+        rgba(10, 10, 10, 0.85) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--dorado);
+      vertical-align: middle;
+      margin: 0 16px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--blanco);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--dorado);
+      font-weight: 400;
+    }
+    .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--crema);
+      margin-bottom: 56px;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.7s forwards;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      opacity: 0;
+      animation: fadeUp 1.2s 0.9s forwards;
+    }
+    .btn-primary {
+      padding: 18px 44px;
+      background: var(--dorado);
+      color: var(--negro);
+      border: 1px solid var(--dorado);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--dorado-claro);
+      border-color: var(--dorado-claro);
+    }
+    .btn-ghost {
+      padding: 18px 44px;
+      background: transparent;
+      color: var(--blanco);
+      border: 1px solid var(--blanco);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-ghost:hover {
+      background: var(--blanco);
+      color: var(--negro);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gris);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); opacity: 0.5; }
+      50% { transform: translate(-50%, 8px); opacity: 1; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============ STATS BAR — STATEMENT NUMBERS ============ */
+    .stats {
+      background: var(--negro-soft);
+      padding: 100px 48px;
+      border-top: 1px solid var(--linea);
+      border-bottom: 1px solid var(--linea);
+    }
+    .stats-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+    }
+    .stat {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--linea);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 1;
+      color: var(--dorado);
+      margin-bottom: 16px;
+    }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gris-claro);
+      font-weight: 400;
+    }
+
+    /* ============ SECTION INTRO ============ */
+    .section {
+      padding: 160px 48px;
+    }
+    .section-light {
+      background: var(--blanco);
+      color: var(--negro);
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--dorado);
+      vertical-align: middle;
+      margin: 0 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+      letter-spacing: -0.015em;
+      color: var(--negro);
+      max-width: 900px;
+      margin: 0 auto 80px;
+      line-height: 1.1;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--dorado-oscuro);
+    }
+
+    .two-col {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .two-col-img {
+      aspect-ratio: 4/5;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+    }
+    .two-col-text {
+      padding: 24px 0;
+    }
+    .two-col-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 32px;
+      letter-spacing: -0.01em;
+      color: var(--negro);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .two-col-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gris);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    .two-col-text p strong {
+      color: var(--negro);
+      font-weight: 500;
+    }
+    .quote-block {
+      border-left: 2px solid var(--dorado);
+      padding: 16px 0 16px 32px;
+      margin: 32px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.5;
+      color: var(--negro);
+    }
+
+    /* ============ ACCESS — Dual CTA panel ============ */
+    .access {
+      background: var(--negro);
+      padding: 160px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .access::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/render2.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      filter: grayscale(100%);
+    }
+    .access-content {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 900px;
+      margin: 80px auto 0;
+    }
+    .access-card {
+      padding: 48px 40px;
+      border: 1px solid var(--linea);
+      background: rgba(10, 10, 10, 0.5);
+      backdrop-filter: blur(20px);
+      transition: all 0.4s;
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      color: var(--blanco);
+      display: block;
+    }
+    .access-card:hover {
+      border-color: var(--dorado);
+      background: rgba(184, 163, 114, 0.08);
+      transform: translateY(-4px);
+    }
+    .access-card-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 16px;
+    }
+    .access-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 36px;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .access-card-desc {
+      color: var(--gris-claro);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .access-card-arrow {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .access-card-arrow::after {
+      content: '→';
+      font-size: 18px;
+      transition: transform 0.4s;
+    }
+    .access-card:hover .access-card-arrow::after {
+      transform: translateX(8px);
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--negro);
+      padding: 80px 48px 40px;
+      border-top: 1px solid var(--linea);
+    }
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--linea);
+    }
+    .footer-col h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 24px;
+    }
+    .footer-col p,
+    .footer-col a {
+      font-size: 13px;
+      color: var(--gris-claro);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+      transition: color 0.4s;
+    }
+    .footer-col a:hover {
+      color: var(--dorado);
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--blanco);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .footer-brand span {
+      color: var(--dorado);
+      font-style: italic;
+      font-weight: 300;
+    }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 32px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--gris);
+    }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 768px) {
+      .nav-top { padding: 20px 24px; }
+      .nav-cta { gap: 16px; }
+      .nav-link { display: none; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .stat { border-right: none; padding: 0; }
+      .section { padding: 80px 24px; }
+      .two-col { grid-template-columns: 1fr; gap: 48px; }
+      .access-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .access { padding: 80px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV TOP GHOST ============ -->
+  <nav class="nav-top" id="nav">
+    <div class="nav-logo">D O M I N I C A <span>· cg</span></div>
+    <div class="nav-cta">
+      <a href="#proyecto" class="nav-link">El Proyecto</a>
+      <a href="#" class="nav-link">Tipologías</a>
+      <a href="#" class="nav-link">Ubicación</a>
+      <a href="#" class="nav-button">Cotizar</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Pereira · NO VIS Premium</p>
+      <h1 class="hero-title">
+        Apartamentos<br>
+        <em>Dominica</em>
+      </h1>
+      <p class="hero-subtitle">5 torres × 6 pisos · Certificación EDGE</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">Cotizar mi apartamento</a>
+        <a href="#proyecto" class="btn-ghost">Conocer el proyecto</a>
+      </div>
+    </div>
+    <p class="hero-scroll-hint">↓ Descubre</p>
+  </section>
+
+  <!-- ============ STATS BAR ============ -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Torres</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Pisos por torre</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">14<span style="font-size:0.6em">+</span></div>
+        <div class="stat-label">Amenidades</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" style="font-size:clamp(2rem,4vw,3rem); padding-top:1rem;">EDGE</div>
+        <div class="stat-label">Certificación</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EL PROYECTO ============ -->
+  <section class="section section-light" id="proyecto">
+    <p class="section-eyebrow">El Proyecto</p>
+    <h2 class="section-title">
+      Vive la <em>esencia del Caribe</em><br>
+      en el corazón de Pereira
+    </h2>
+    
+    <div class="two-col">
+      <div class="two-col-img" style="background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/render1.jpg');"></div>
+      <div class="two-col-text">
+        <h3>Un hogar inspirado en el encanto tropical</h3>
+        <p>
+          <strong>Apartamentos Dominica</strong> es un proyecto donde la arquitectura y la naturaleza se fusionan para ofrecer un hogar que respira bienestar y sofisticación.
+        </p>
+        <p>
+          Desde sus terrazas amplias hasta sus espacios llenos de luz y ventilación natural, Dominica redefine la experiencia de habitar.
+        </p>
+        <div class="quote-block">
+          "Imagina despertar cada día rodeado de la tranquilidad y la frescura de una <em>isla caribeña</em>, sin salir de la ciudad."
+        </div>
+        <p>
+          Con certificación <strong>EDGE</strong>, eficiencia energética y sostenibilidad como pilares del diseño.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACCESS PANEL ============ -->
+  <section class="access">
+    <div class="access-content">
+      <p class="section-eyebrow" style="color: var(--dorado);">Comencemos</p>
+      <h2 style="font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2rem, 4vw, 3.5rem); color: var(--blanco); letter-spacing: -0.015em;">
+        Una experiencia, dos formas de explorarla
+      </h2>
+      
+      <div class="access-grid">
+        <a href="#" class="access-card">
+          <p class="access-card-eyebrow">Para Asesores</p>
+          <h3 class="access-card-title">Modo Sala</h3>
+          <p class="access-card-desc">
+            Tour guiado completo + cotizador en tiempo real. Para presentación profesional al cliente en sala de ventas.
+          </p>
+          <span class="access-card-arrow">Ingresar como asesor</span>
+        </a>
+        
+        <a href="#" class="access-card">
+          <p class="access-card-eyebrow">Para Clientes</p>
+          <h3 class="access-card-title">Modo Web</h3>
+          <p class="access-card-desc">
+            Explora el proyecto a tu ritmo y autocotiza tu apartamento desde cualquier dispositivo.
+          </p>
+          <span class="access-card-arrow">Ver el proyecto</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">D O M I N I C A <span>· cg</span></div>
+        <p>
+          Vivienda NO VIS Premium en Pereira.<br>
+          Por CG Constructora S.A.S.<br>
+          NIT 800.051.984-2
+        </p>
+        <p style="margin-top: 16px; color: var(--dorado-oscuro); font-style: italic;">
+          Más de 7.200 viviendas construidas
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Proyecto</h4>
+        <a href="#">El Proyecto</a>
+        <a href="#">Tipologías</a>
+        <a href="#">Amenidades</a>
+        <a href="#">Recorrido 360°</a>
+        <a href="#">Etapas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="#">+57 318 307 5080</a>
+        <a href="#">@cgconstructora.co</a>
+        <a href="#">cgconstructora.com</a>
+        <p style="margin-top: 12px;">Calle 70 No. 50-97<br>Pereira, Risaralda</p>
+      </div>
+      <div class="footer-col">
+        <h4>Aliados</h4>
+        <p>Fiduciaria Bancolombia</p>
+        <p>Crédito constructor Bancolombia</p>
+        <p>Certificación EDGE</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CG CONSTRUCTORA S.A.S. · Todos los derechos reservados</p>
+      <p>Imágenes ilustrativas · Sujetas a modificación</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav ghost on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+
+</body>
+</html>

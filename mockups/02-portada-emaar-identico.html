@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartamentos Dominica · Estilo Emaar</title>
+  
+  <!-- Fonts: Cormorant para logo serif, Inter para todo lo demás -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============ PALETA EMAAR REAL ============ */
+    :root {
+      --blanco: #FFFFFF;
+      --blanco-off: #FAF9F6;
+      --navy: #1B2D5C;          /* CTA principal Emaar */
+      --navy-dark: #0F1B3D;
+      --rojo-emaar: #C7141C;    /* Logo Emaar */
+      --negro: #1A1A1A;
+      --gris: #6E6E6E;
+      --gris-claro: #B8B8B8;
+      --beige: #F5F2EC;
+      --linea: #E8E8E8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--blanco);
+      color: var(--negro);
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ============ NAV TOP — BLANCA SÓLIDA ============ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--blanco);
+      border-bottom: 1px solid var(--linea);
+      padding: 16px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--rojo-emaar);
+      letter-spacing: 0.15em;
+      text-decoration: none;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .nav-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--negro);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-link:hover {
+      color: var(--rojo-emaar);
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .lang-selector {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--negro);
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--negro);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .icon-btn:hover { color: var(--rojo-emaar); }
+    .icon-btn svg { width: 22px; height: 22px; }
+    .nav-cta {
+      padding: 14px 28px;
+      background: var(--navy);
+      color: var(--blanco);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .nav-cta:hover { background: var(--navy-dark); }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 80px;
+      height: calc(100vh - 80px);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/banner.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4) 100%);
+    }
+    /* Marca de agua centrada estilo Emaar — texto thin transparente */
+    .hero-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .hero-watermark-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(4rem, 12vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+    }
+    .hero-watermark-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.5rem, 3.5vw, 3rem);
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    /* ============ SEARCH BAR PILL FLOTANTE ============ */
+    .search-bar {
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: var(--blanco);
+      border-radius: 100px;
+      padding: 12px 12px 12px 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: calc(100% - 96px);
+      max-width: 1200px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    .search-field {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-right: 1px solid var(--linea);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--negro);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      outline: none;
+    }
+    .search-field::after {
+      content: '⌄';
+      color: var(--gris);
+      font-size: 16px;
+    }
+    .search-field:last-of-type {
+      border-right: none;
+    }
+    .search-cta {
+      padding: 16px 32px;
+      background: var(--navy);
+      color: var(--blanco);
+      border: none;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .search-cta:hover { background: var(--navy-dark); }
+
+    /* ============ SECTION TITLE ============ */
+    .section {
+      padding: 120px 48px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: 0.05em;
+      color: var(--negro);
+      text-transform: uppercase;
+      line-height: 1.2;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gris);
+      margin-top: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.02em;
+    }
+
+    /* ============ PROPERTY CARDS GRID ============ */
+    .properties-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .property-card {
+      background: var(--blanco);
+      cursor: pointer;
+      transition: transform 0.4s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .property-card:hover {
+      transform: translateY(-8px);
+    }
+    .property-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 24px;
+    }
+    .property-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rojo-emaar);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .property-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 28px;
+      color: var(--negro);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .property-location {
+      font-size: 13px;
+      color: var(--gris);
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    .property-meta {
+      display: flex;
+      gap: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--linea);
+      font-size: 12px;
+      color: var(--negro);
+    }
+    .property-meta strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--rojo-emaar);
+      margin-bottom: 2px;
+    }
+
+    /* ============ FEATURED SECTION ============ */
+    .featured {
+      padding: 120px 48px;
+      background: var(--beige);
+    }
+    .featured-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .featured-img {
+      aspect-ratio: 4/5;
+      background-size: cover;
+      background-position: center;
+    }
+    .featured-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rojo-emaar);
+      margin-bottom: 24px;
+    }
+    .featured-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--negro);
+      line-height: 1.2;
+      margin-bottom: 32px;
+      letter-spacing: 0.02em;
+    }
+    .featured-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gris);
+      margin-bottom: 24px;
+    }
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--negro);
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 2px solid var(--rojo-emaar);
+      margin-top: 24px;
+      transition: gap 0.3s;
+    }
+    .btn-link::after {
+      content: '→';
+      font-size: 16px;
+    }
+    .btn-link:hover { gap: 20px; }
+
+    /* ============ STATS BAND ============ */
+    .stats-band {
+      padding: 80px 48px;
+      background: var(--navy);
+      color: var(--blanco);
+    }
+    .stats-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      color: var(--blanco);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--negro);
+      color: var(--blanco);
+      padding: 80px 48px 32px;
+    }
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--rojo-emaar);
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+    .footer-text {
+      font-size: 13px;
+      color: var(--gris-claro);
+      line-height: 1.8;
+    }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: var(--gris-claro);
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--rojo-emaar); }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 32px auto 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--gris-claro);
+    }
+
+    /* ============ MOBILE ============ */
+    @media (max-width: 1024px) {
+      .nav-menu { display: none; }
+      .properties-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-content { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 16px 24px; }
+      .nav-cta { padding: 12px 18px; font-size: 10px; }
+      .search-bar { 
+        padding: 8px;
+        flex-direction: column;
+        border-radius: 16px;
+        bottom: 24px;
+        width: calc(100% - 32px);
+      }
+      .search-field { 
+        width: 100%; 
+        padding: 14px 16px;
+        border-right: none;
+        border-bottom: 1px solid var(--linea);
+      }
+      .search-cta { width: 100%; padding: 14px 24px; }
+      .section { padding: 60px 24px; }
+      .featured { padding: 60px 24px; }
+      .properties-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .stat-item { border-right: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV BLANCA ============ -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">DOMINICA</a>
+    
+    <div class="nav-menu">
+      <a href="#" class="nav-link">El Proyecto</a>
+      <a href="#" class="nav-link">Tipologías</a>
+      <a href="#" class="nav-link">Ubicación</a>
+      <a href="#" class="nav-link">Amenidades</a>
+      <a href="#" class="nav-link">Recorrido 360°</a>
+    </div>
+    
+    <div class="nav-right">
+      <span class="lang-selector">ESP <span style="font-size:10px;">▼</span></span>
+      
+      <a href="#" class="icon-btn" title="Recorrido 360">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.618v6.764a1 1 0 0 1-1.447.894L15 14M5 18h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/></svg>
+      </a>
+      
+      <a href="#" class="icon-btn" title="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+      </a>
+      
+      <a href="#" class="nav-cta">Cotiza ahora</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Marca de agua estilo Emaar -->
+    <div class="hero-watermark">
+      <h1 class="hero-watermark-title">Dominica</h1>
+      <p class="hero-watermark-sub">Apartamentos · Pereira</p>
+    </div>
+    
+    <!-- Search bar flotante -->
+    <div class="search-bar">
+      <button class="search-field">Tipología</button>
+      <button class="search-field">Torre</button>
+      <button class="search-field">Rango precio</button>
+      <button class="search-field">Disponibilidad</button>
+      <button class="search-cta">Buscar Apartamentos</button>
+    </div>
+  </section>
+
+  <!-- ============ SECCIÓN PREMIUM PROPERTIES ============ -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Apartamentos Premium en Pereira</h2>
+      <p class="section-subtitle">
+        Descubre las distribuciones únicas de Dominica. Cada apartamento de 2 alcobas + espacio multifuncional, diseñado para quienes buscan calidad de vida con identidad caribeña.
+      </p>
+    </div>
+    
+    <div class="properties-grid">
+      <a href="#" class="property-card">
+        <div class="property-img" style="background-image: url('https://cgconstructora.com/wp-content/uploads/2024/09/tipo1.jpg');"></div>
+        <p class="property-tag">Más buscado</p>
+        <h3 class="property-title">FLAT HOUSE</h3>
+        <p class="property-location">Torre 4 · 2 alcobas + multifuncional</p>
+        <div class="property-meta">
+          <div><strong>5</strong> Disponibles</div>
+          <div><strong>92m²</strong> Área típica</div>
+          <div><strong>$469M</strong> Desde</div>
+        </div>
+      </a>
+      
+      <a href="#" class="property-card">
+        <div class="property-img" style="background-image: url('https://cgconstructora.com/wp-content/uploads/2024/09/tipo2.jpg');"></div>
+        <p class="property-tag">Vista panorámica</p>
+        <h3 class="property-title">BALCONY</h3>
+        <p class="property-location">Torre 4 · Énfasis en balcón exterior</p>
+        <div class="property-meta">
+          <div><strong>12</strong> Disponibles</div>
+          <div><strong>75m²</strong> Área típica</div>
+          <div><strong>$446M</strong> Desde</div>
+        </div>
+      </a>
+      
+      <a href="#" class="property-card">
+        <div class="property-img" style="background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/PH-TP6-SALA-V3.jpg');"></div>
+        <p class="property-tag">Edición Limitada</p>
+        <h3 class="property-title">PRESTIGE 117</h3>
+        <p class="property-location">Penthouse + terraza · Solo piso 5</p>
+        <div class="property-meta">
+          <div><strong>1</strong> Disponible</div>
+          <div><strong>130m²</strong> Total vendible</div>
+          <div><strong>$783M</strong> Desde</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED SECTION ============ -->
+  <section class="featured">
+    <div class="featured-content">
+      <div class="featured-img" style="background-image: url('https://cgconstructora.com/wp-content/uploads/2025/05/render1.jpg');"></div>
+      <div class="featured-text">
+        <h3>El Proyecto</h3>
+        <h2>Vive la esencia del Caribe en el corazón de Pereira</h2>
+        <p>
+          Apartamentos Dominica es un proyecto inspirado en el encanto tropical, donde la arquitectura y la naturaleza se fusionan para ofrecerte un hogar que respira bienestar y sofisticación.
+        </p>
+        <p>
+          Con certificación EDGE, eficiencia energética y sostenibilidad como pilares del diseño que fluye con el entorno.
+        </p>
+        <a href="#" class="btn-link">Conocer el proyecto</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS BAND NAVY ============ -->
+  <section class="stats-band">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Torres</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Pisos por torre</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">14<span style="font-size:0.5em;">+</span></div>
+        <div class="stat-label">Amenidades</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" style="font-size:clamp(2rem,3.5vw,3rem); padding-top:0.5rem;">EDGE</div>
+        <div class="stat-label">Certificación</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">DOMINICA</div>
+        <p class="footer-text">
+          Apartamentos NO VIS Premium<br>
+          Calle 70 No. 50-97, Pereira<br><br>
+          CG CONSTRUCTORA S.A.S.<br>
+          NIT 800.051.984-2<br><br>
+          <em style="color: var(--rojo-emaar);">Más de 7.200 viviendas construidas</em>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Proyecto</h4>
+        <a href="#">El Proyecto</a>
+        <a href="#">Tipologías</a>
+        <a href="#">Amenidades</a>
+        <a href="#">Recorrido 360°</a>
+        <a href="#">Etapas</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="#">+57 318 307 5080</a>
+        <a href="#">@cgconstructora.co</a>
+        <a href="#">Sala de ventas</a>
+        <a href="#">Cotizar online</a>
+      </div>
+      <div class="footer-col">
+        <h4>Aliados</h4>
+        <a href="#">Fiduciaria Bancolombia</a>
+        <a href="#">Crédito Bancolombia</a>
+        <a href="#">Certificación EDGE</a>
+        <a href="#">Triple A</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 CG CONSTRUCTORA · TODOS LOS DERECHOS RESERVADOS</p>
+      <p>IMÁGENES ILUSTRATIVAS · SUJETAS A MODIFICACIÓN</p>
+    </div>
+  </footer>
+
+</body>
+</html>
