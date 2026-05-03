@@ -18,24 +18,27 @@ export function PlanCuotas({ cuotas, valorNeto }: Props) {
 
   return (
     <div className="bg-white border border-gris-muyclaro overflow-hidden">
+      {/* Header con fondo claro y texto negro */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full bg-navy text-white p-5 flex items-center justify-between hover:bg-navy-dark transition-colors"
+        className="w-full bg-beige border-b border-gris-muyclaro p-5 flex items-center justify-between hover:bg-beige/70 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Calendar className="w-5 h-5 text-rojo" />
+          <div className="w-10 h-10 bg-navy flex items-center justify-center flex-shrink-0">
+            <Calendar className="w-5 h-5 text-rojo" />
+          </div>
           <div className="text-left">
             <p className="text-rojo text-[10px] tracking-[0.3em] uppercase font-semibold">Cronograma de pagos</p>
-            <p className="font-display text-xl tracking-wide">{cuotas.length} pagos programados</p>
+            <p className="font-display text-xl text-negro tracking-wide">{cuotas.length} pagos programados</p>
           </div>
         </div>
-        <ChevronDown className={`w-5 h-5 transition-transform ${expanded ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-5 h-5 text-negro transition-transform ${expanded ? "rotate-180" : ""}`} />
       </button>
 
       {expanded && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-beige text-[10px] tracking-[0.15em] uppercase text-gris">
+            <thead className="bg-beige/50 text-[10px] tracking-[0.15em] uppercase text-gris border-b border-gris-muyclaro">
               <tr>
                 <th className="text-left p-3 font-semibold">N°</th>
                 <th className="text-left p-3 font-semibold">Fecha</th>
@@ -46,7 +49,7 @@ export function PlanCuotas({ cuotas, valorNeto }: Props) {
             </thead>
             <tbody>
               {cuotas.map((c, i) => (
-                <tr key={i} className={`border-t border-gris-muyclaro ${i % 2 === 0 ? "bg-white" : "bg-beige/30"}`}>
+                <tr key={i} className={`border-t border-gris-muyclaro ${i % 2 === 0 ? "bg-white" : "bg-beige/20"}`}>
                   <td className="p-3 font-bold text-navy">{c.numero}</td>
                   <td className="p-3 text-negro text-xs">{formatDate(c.fecha)}</td>
                   <td className="p-3 text-negro text-xs">{c.descripcion}</td>
