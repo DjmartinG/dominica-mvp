@@ -21,7 +21,7 @@ export function Alertas({ alertas }: { alertas: Alerta[] }) {
         return (
           <div
             key={a.id}
-            className={`flex items-start gap-3 p-3 rounded-lg border-l-4 ${cfg.bg} ${cfg.border}`}
+            className={`flex items-start gap-3 p-3 border-l-4 ${cfg.bg} ${cfg.border}`}
           >
             <Icon className={`w-5 h-5 ${cfg.text} flex-shrink-0 mt-0.5`} />
             <p className={`text-sm font-semibold ${cfg.text}`}>{a.mensaje}</p>

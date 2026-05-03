@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Calculator, TrendingUp, AlertCircle, CheckCircle2, AlertTriangle, XCircle, Wallet, Building2 } from "lucide-react";
 import { Apto, PlanPago, formatCOP } from "@/lib/cotizador";
-import { analizarViabilidad, TASA_HIPOTECARIA_EA, PLAZO_MESES_ESTANDAR, gastosNotariales } from "@/lib/hipoteca";
+import { analizarViabilidad } from "@/lib/hipoteca";
 
 interface Props {
   apto: Apto | null;
@@ -19,6 +19,53 @@ const VIABILIDAD_CONFIG = {
   roja: { color: "text-rojo", bg: "bg-rojo/10", border: "border-rojo", icon: XCircle, label: "Capacidad insuficiente" },
 };
 
+/** Formato con separadores de miles tipo "5.000.000" para Colombia */
+function formatNumberCO(n: number): string {
+  if (!n || n === 0) return "";
+  return new Intl.NumberFormat("es-CO").format(n);
+}
+
+/** Limpia separadores y devuelve número puro */
+function parseNumberCO(s: string): number {
+  const clean = s.replace(/[^\d]/g, "");
+  return parseInt(clean, 10) || 0;
+}
+
+interface MoneyInputProps {
+  value: number;
+  onChange: (n: number) => void;
+  placeholder?: string;
+}
+
+function MoneyInput({ value, onChange, placeholder }: MoneyInputProps) {
+  const [display, setDisplay] = useState(formatNumberCO(value));
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numVal = parseNumberCO(e.target.value);
+    onChange(numVal);
+    setDisplay(formatNumberCO(numVal));
+  };
+
+  // Sync external changes
+  useMemo(() => {
+    setDisplay(formatNumberCO(value));
+  }, [value]);
+
+  return (
+    <div className="relative">
+      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-rojo font-bold text-lg pointer-events-none">$</span>
+      <input
+        type="text"
+        inputMode="numeric"
+        value={display}
+        onChange={handleChange}
+        placeholder={placeholder}
+        className="w-full bg-beige border-2 border-gris-muyclaro pl-9 pr-4 py-4 text-negro text-2xl font-display tracking-wide focus:outline-none focus:border-navy transition-colors"
+      />
+    </div>
+  );
+}
+
 export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onCompletar }: Props) {
   const [ingresoTitular, setIngresoTitular] = useState<number>(0);
   const [ingresoCodeudor, setIngresoCodeudor] = useState<number>(0);
@@ -26,7 +73,7 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
 
   const esContado = plan === "Plan Contado";
   const ingresoTotal = ingresoTitular + ingresoCodeudor;
-  const completado = esContado || ingresoTitular >= 1000000; // mínimo $1M para considerar válido
+  const completado = esContado || ingresoTitular >= 1000000;
 
   const analisis = useMemo(() => {
     if (!apto) return null;
@@ -39,7 +86,6 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
     });
   }, [apto, ingresoTitular, ingresoCodeudor, showCodeudor, valorNeto, cuotaInicial, esContado]);
 
-  // Notificar al padre cuando se completa
   useMemo(() => {
     onCompletar(completado, ingresoTotal);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,12 +104,11 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
       </div>
 
       {esContado ? (
-        // Modo Contado: omite simulador
         <div className="bg-ok/10 border-l-4 border-ok p-5 flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-ok flex-shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-ok mb-1">Pago contado seleccionado</p>
-            <p className="text-sm text-negro">No requiere análisis de capacidad de crédito hipotecario. Continúa con el resumen económico.</p>
+            <p className="text-sm text-negro">No requiere análisis de capacidad de crédito hipotecario.</p>
           </div>
         </div>
       ) : (
@@ -72,74 +117,63 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
             Confirma que los ingresos del comprador permiten asumir la cuota hipotecaria del 70% restante después de la entrega del proyecto.
           </p>
 
-          {/* Inputs ingresos */}
+          {/* Inputs con formato de miles */}
           <div className="grid sm:grid-cols-2 gap-4 mb-6">
             <div>
               <label className="text-[11px] font-bold tracking-[0.2em] uppercase text-rojo mb-2 block">
                 Ingresos mensuales del titular
               </label>
-              <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gris font-semibold">$</span>
-                <input
-                  type="number"
-                  value={ingresoTitular || ""}
-                  onChange={(e) => setIngresoTitular(Number(e.target.value) || 0)}
-                  placeholder="3.500.000"
-                  className="w-full bg-beige border-2 border-gris-muyclaro pl-8 pr-4 py-4 text-negro text-lg font-semibold focus:outline-none focus:border-navy transition-colors"
-                />
-              </div>
+              <MoneyInput value={ingresoTitular} onChange={setIngresoTitular} placeholder="3.500.000" />
               {ingresoTitular > 0 && (
-                <p className="text-[11px] text-gris mt-1">{formatCOP(ingresoTitular)}</p>
+                <p className="text-[11px] text-gris mt-2 tracking-wide">
+                  <strong className="text-negro">{formatCOP(ingresoTitular)}</strong> / mes
+                </p>
               )}
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-[11px] font-bold tracking-[0.2em] uppercase text-rojo">
-                  Cónyuge / Codeudor (opcional)
+                  Cónyuge / Codeudor
                 </label>
                 {!showCodeudor && (
                   <button
                     type="button"
                     onClick={() => setShowCodeudor(true)}
-                    className="text-[10px] tracking-[0.15em] uppercase text-cielo hover:text-cielo/80"
+                    className="text-[10px] tracking-[0.15em] uppercase font-semibold text-cielo hover:text-navy"
                   >
                     + Agregar
                   </button>
                 )}
               </div>
               {showCodeudor ? (
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gris font-semibold">$</span>
-                  <input
-                    type="number"
-                    value={ingresoCodeudor || ""}
-                    onChange={(e) => setIngresoCodeudor(Number(e.target.value) || 0)}
-                    placeholder="2.500.000"
-                    className="w-full bg-beige border-2 border-gris-muyclaro pl-8 pr-4 py-4 text-negro text-lg font-semibold focus:outline-none focus:border-navy transition-colors"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => { setShowCodeudor(false); setIngresoCodeudor(0); }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] uppercase text-gris hover:text-rojo"
-                  >
-                    Quitar
-                  </button>
-                </div>
+                <>
+                  <div className="relative">
+                    <MoneyInput value={ingresoCodeudor} onChange={setIngresoCodeudor} placeholder="2.500.000" />
+                    <button
+                      type="button"
+                      onClick={() => { setShowCodeudor(false); setIngresoCodeudor(0); }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] uppercase font-semibold text-gris hover:text-rojo bg-white px-2 py-1"
+                    >
+                      Quitar
+                    </button>
+                  </div>
+                  {ingresoCodeudor > 0 && (
+                    <p className="text-[11px] text-gris mt-2 tracking-wide">
+                      <strong className="text-negro">{formatCOP(ingresoCodeudor)}</strong> / mes
+                    </p>
+                  )}
+                </>
               ) : (
-                <div className="bg-beige/50 border-2 border-dashed border-gris-muyclaro p-4 text-xs text-gris text-center">
+                <div className="bg-beige/50 border-2 border-dashed border-gris-muyclaro p-4 text-xs text-gris text-center h-full flex items-center justify-center min-h-[68px]">
                   Suma capacidad si aplican juntos al crédito
                 </div>
-              )}
-              {showCodeudor && ingresoCodeudor > 0 && (
-                <p className="text-[11px] text-gris mt-1">{formatCOP(ingresoCodeudor)}</p>
               )}
             </div>
           </div>
 
           {ingresoTotal > 0 && analisis && viabConfig && (
             <>
-              {/* Indicador de viabilidad */}
               <div className={`${viabConfig.bg} border-l-4 ${viabConfig.border} p-5 mb-6`}>
                 <div className="flex items-start gap-3">
                   <ViabIcon className={`w-6 h-6 ${viabConfig.color} flex-shrink-0`} />
@@ -152,7 +186,6 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
                 </div>
               </div>
 
-              {/* Detalles del análisis */}
               <div className="grid sm:grid-cols-2 gap-3 mb-6">
                 <div className="bg-beige p-4">
                   <p className="text-[10px] tracking-[0.2em] uppercase text-gris flex items-center gap-1 mb-2">
@@ -172,7 +205,6 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
                 </div>
               </div>
 
-              {/* Cuota hipotecaria del proyecto vs capacidad */}
               <div className="bg-navy text-white p-5 mb-6">
                 <p className="text-rojo text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">
                   Cuota hipotecaria estimada para este apto
@@ -198,7 +230,6 @@ export function SimuladorCapacidad({ apto, valorNeto, cuotaInicial, plan, onComp
                 </div>
               </div>
 
-              {/* Recursos propios necesarios */}
               <div className="bg-beige p-5">
                 <p className="eyebrow mb-3 flex items-center gap-2">
                   <Building2 className="w-3 h-3" />

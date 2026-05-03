@@ -10,23 +10,23 @@ interface Props {
 }
 
 export function PlanCuotas({ cuotas, valorNeto }: Props) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const total = cuotas.reduce((s, c) => s + c.valor, 0);
-  const cuadra = Math.abs(total - valorNeto) < 100; // tolerancia $100 por redondeo
+  const cuadra = Math.abs(total - valorNeto) < 100;
 
   if (cuotas.length === 0) return null;
 
   return (
-    <div className="card-dominica !p-0 overflow-hidden">
+    <div className="bg-white border border-gris-muyclaro overflow-hidden">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full bg-caribe-dark text-white p-4 flex items-center justify-between hover:bg-caribe transition-colors"
+        className="w-full bg-navy text-white p-5 flex items-center justify-between hover:bg-navy-dark transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Calendar className="w-5 h-5 text-turquesa" />
+          <Calendar className="w-5 h-5 text-rojo" />
           <div className="text-left">
-            <p className="font-display text-lg">Cronograma de pagos</p>
-            <p className="text-turquesa text-xs">{cuotas.length} pagos programados</p>
+            <p className="text-rojo text-[10px] tracking-[0.3em] uppercase font-semibold">Cronograma de pagos</p>
+            <p className="font-display text-xl tracking-wide">{cuotas.length} pagos programados</p>
           </div>
         </div>
         <ChevronDown className={`w-5 h-5 transition-transform ${expanded ? "rotate-180" : ""}`} />
@@ -35,7 +35,7 @@ export function PlanCuotas({ cuotas, valorNeto }: Props) {
       {expanded && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-turquesa-light text-caribe-dark">
+            <thead className="bg-beige text-[10px] tracking-[0.15em] uppercase text-gris">
               <tr>
                 <th className="text-left p-3 font-semibold">N°</th>
                 <th className="text-left p-3 font-semibold">Fecha</th>
@@ -46,27 +46,25 @@ export function PlanCuotas({ cuotas, valorNeto }: Props) {
             </thead>
             <tbody>
               {cuotas.map((c, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-crema"}>
-                  <td className="p-3 font-bold text-caribe">{c.numero}</td>
-                  <td className="p-3 text-carbon">{formatDate(c.fecha)}</td>
-                  <td className="p-3 text-carbon">{c.descripcion}</td>
-                  <td className="p-3 text-right font-semibold text-carbon">{formatCOP(c.valor)}</td>
-                  <td className="p-3 text-right text-carbon/60 hidden sm:table-cell">
-                    {formatCOP(c.saldoPendiente)}
-                  </td>
+                <tr key={i} className={`border-t border-gris-muyclaro ${i % 2 === 0 ? "bg-white" : "bg-beige/30"}`}>
+                  <td className="p-3 font-bold text-navy">{c.numero}</td>
+                  <td className="p-3 text-negro text-xs">{formatDate(c.fecha)}</td>
+                  <td className="p-3 text-negro text-xs">{c.descripcion}</td>
+                  <td className="p-3 text-right font-semibold text-negro">{formatCOP(c.valor)}</td>
+                  <td className="p-3 text-right text-gris hidden sm:table-cell">{formatCOP(c.saldoPendiente)}</td>
                 </tr>
               ))}
-              <tr className="bg-caribe text-white font-bold">
-                <td colSpan={3} className="p-3 text-right">TOTAL</td>
+              <tr className="bg-navy text-white font-bold">
+                <td colSpan={3} className="p-3 text-right text-xs tracking-[0.15em] uppercase">TOTAL</td>
                 <td className="p-3 text-right">{formatCOP(total)}</td>
                 <td className="p-3 text-right hidden sm:table-cell">
-                  {cuadra && <CheckCircle2 className="inline w-4 h-4 text-turquesa" />}
+                  {cuadra && <CheckCircle2 className="inline w-4 h-4 text-ok" />}
                 </td>
               </tr>
             </tbody>
           </table>
           {!cuadra && (
-            <p className="p-3 text-xs text-alert bg-alert/10">
+            <p className="p-3 text-xs text-rojo bg-rojo/10">
               ⚠ Diferencia de redondeo: {formatCOP(total - valorNeto)}
             </p>
           )}

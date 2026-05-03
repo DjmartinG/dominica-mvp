@@ -16,7 +16,7 @@ export function DepositoSelector({ selected, onSelect }: Props) {
 
   return (
     <div>
-      <label className="text-xs uppercase tracking-widest text-caribe font-bold mb-2 flex items-center gap-2">
+      <label className="text-xs uppercase tracking-widest text-navy font-bold mb-2 flex items-center gap-2">
         <Package className="w-4 h-4" />
         Depósito (opcional)
       </label>
@@ -26,7 +26,7 @@ export function DepositoSelector({ selected, onSelect }: Props) {
           const d = items.find((x) => x.id === e.target.value);
           if (d) onSelect(d);
         }}
-        className="w-full bg-white border-2 border-turquesa-light rounded-xl px-4 py-3 text-carbon font-semibold focus:outline-none focus:border-caribe transition-colors"
+        className="w-full bg-white border-2 border-gris-muyclaro px-4 py-3 text-negro font-semibold focus:outline-none focus:border-navy transition-colors"
       >
         {items.map((d) => (
           <option key={d.id} value={d.id}>

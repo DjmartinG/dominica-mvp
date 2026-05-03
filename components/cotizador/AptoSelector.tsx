@@ -35,29 +35,29 @@ export function AptoSelector({ selected, onSelect }: Props) {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="w-full bg-white border-2 border-turquesa hover:border-caribe rounded-2xl p-4 flex items-center gap-4 transition-all text-left group"
+        className="w-full bg-white border-2 border-cielo hover:border-navy p-4 flex items-center gap-4 transition-all text-left group"
       >
-        <div className="bg-caribe text-white p-3 rounded-xl">
+        <div className="bg-navy text-white p-3">
           <Building2 className="w-6 h-6" />
         </div>
         <div className="flex-1 min-w-0">
           {selected ? (
             <>
-              <p className="font-display text-caribe text-xl">
+              <p className="font-display text-navy text-xl">
                 Apto {selected.numero} — {selected.tipologia}
               </p>
-              <p className="text-sm text-carbon/70">
+              <p className="text-sm text-negro/70">
                 {selected.vista} · {formatArea(selected.areaVendible)} · {formatCOP(selected.valorApartamento)}
               </p>
             </>
           ) : (
             <>
-              <p className="font-display text-caribe text-lg">Selecciona tu apartamento</p>
-              <p className="text-sm text-carbon/60">{disponibles.length} disponibles en T4</p>
+              <p className="font-display text-navy text-lg">Selecciona tu apartamento</p>
+              <p className="text-sm text-negro/60">{disponibles.length} disponibles en T4</p>
             </>
           )}
         </div>
-        <ChevronDown className="w-5 h-5 text-caribe group-hover:translate-y-1 transition-transform" />
+        <ChevronDown className="w-5 h-5 text-navy group-hover:translate-y-1 transition-transform" />
       </button>
 
       {/* Modal */}
@@ -70,26 +70,26 @@ export function AptoSelector({ selected, onSelect }: Props) {
             className="bg-white w-full sm:max-w-3xl sm:rounded-3xl rounded-t-3xl shadow-2xl max-h-[90vh] flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-caribe text-white p-5 flex items-center justify-between">
+            <div className="bg-navy text-white p-5 flex items-center justify-between">
               <div>
                 <h3 className="font-display text-xl">Apartamentos disponibles</h3>
-                <p className="text-turquesa text-sm">{filtrados.length} unidades coinciden</p>
+                <p className="text-cielo text-sm">{filtrados.length} unidades coinciden</p>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition-colors"
+                className="bg-white/10 hover:bg-white/20 p-2 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Filtros */}
-            <div className="p-4 border-b bg-crema flex flex-wrap gap-3 items-center">
-              <Filter className="w-4 h-4 text-caribe" />
+            <div className="p-4 border-b bg-beige flex flex-wrap gap-3 items-center">
+              <Filter className="w-4 h-4 text-navy" />
               <select
                 value={filtroTorre}
                 onChange={(e) => setFiltroTorre(e.target.value === "all" ? "all" : Number(e.target.value))}
-                className="bg-white border border-turquesa rounded-lg px-3 py-1.5 text-sm font-semibold text-caribe focus:outline-none focus:ring-2 focus:ring-caribe"
+                className="bg-white border border-cielo px-3 py-1.5 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-navy"
               >
                 <option value="all">Todas las torres</option>
                 <option value={4}>Torre 4</option>
@@ -97,7 +97,7 @@ export function AptoSelector({ selected, onSelect }: Props) {
               <select
                 value={filtroTipo}
                 onChange={(e) => setFiltroTipo(e.target.value)}
-                className="bg-white border border-turquesa rounded-lg px-3 py-1.5 text-sm font-semibold text-caribe focus:outline-none focus:ring-2 focus:ring-caribe"
+                className="bg-white border border-cielo px-3 py-1.5 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-navy"
               >
                 <option value="all">Todas las tipologías</option>
                 {tipologias.map((t) => (
@@ -115,29 +115,29 @@ export function AptoSelector({ selected, onSelect }: Props) {
                     onSelect(a);
                     setOpen(false);
                   }}
-                  className={`text-left p-4 rounded-xl border-2 transition-all ${
+                  className={`text-left p-4 border-2 transition-all ${
                     selected?.id === a.id
-                      ? "border-caribe bg-turquesa-light"
-                      : "border-turquesa-light bg-white hover:border-caribe"
+                      ? "border-navy bg-beige"
+                      : "border-gris-muyclaro bg-white hover:border-navy"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-display text-caribe text-lg">Apto {a.numero}</span>
-                    {selected?.id === a.id && <CheckCircle2 className="w-5 h-5 text-caribe" />}
+                    <span className="font-display text-navy text-lg">Apto {a.numero}</span>
+                    {selected?.id === a.id && <CheckCircle2 className="w-5 h-5 text-navy" />}
                   </div>
-                  <p className="text-xs text-cg-dorado uppercase tracking-widest font-semibold mb-2">
+                  <p className="text-xs text-rojo uppercase tracking-widest font-semibold mb-2">
                     {a.tipologia}
                   </p>
-                  <p className="text-sm text-carbon mb-2">
+                  <p className="text-sm text-negro mb-2">
                     {a.vista} · Piso {a.piso} · {formatArea(a.areaVendible)}
                   </p>
-                  <p className="text-caribe font-bold text-base">
+                  <p className="text-navy font-bold text-base">
                     {formatCOP(a.valorApartamento)}
                   </p>
                 </button>
               ))}
               {filtrados.length === 0 && (
-                <div className="col-span-full text-center py-12 text-carbon/60">
+                <div className="col-span-full text-center py-12 text-negro/60">
                   No hay apartamentos con esos filtros
                 </div>
               )}

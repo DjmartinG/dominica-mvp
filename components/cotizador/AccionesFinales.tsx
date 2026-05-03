@@ -46,9 +46,9 @@ CG Constructora · Apartamentos Dominica
   };
 
   return (
-    <div className="card-dominica !p-5 bg-gradient-to-br from-caribe to-caribe-dark text-white">
+    <div className="bg-white shadow-card !p-5 bg-gradient-to-br from-navy to-navy-dark text-white">
       <h3 className="font-display text-xl mb-4">¡Lista la cotización!</h3>
-      <p className="text-turquesa text-sm mb-5">
+      <p className="text-cielo text-sm mb-5">
         Comparte con el cliente o guárdala para seguimiento.
       </p>
       
@@ -56,7 +56,7 @@ CG Constructora · Apartamentos Dominica
         <button
           onClick={handleWhatsApp}
           disabled={disabled}
-          className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white text-caribe-dark font-bold hover:bg-turquesa transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-white text-navy-dark font-bold hover:bg-cielo transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <MessageCircle className="w-5 h-5" />
           Enviar por WhatsApp
@@ -64,7 +64,7 @@ CG Constructora · Apartamentos Dominica
         <button
           onClick={onGuardar}
           disabled={disabled}
-          className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-cielo text-white font-bold hover:bg-cielo/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-cielo text-white font-bold hover:bg-cielo/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Save className="w-5 h-5" />
           Guardar cotización
@@ -75,14 +75,14 @@ CG Constructora · Apartamentos Dominica
         <button
           onClick={handlePrint}
           disabled={disabled}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20 transition-all disabled:opacity-50 text-sm"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white/10 text-white font-semibold hover:bg-white/20 transition-all disabled:opacity-50 text-sm"
         >
           <Printer className="w-4 h-4" />
           Imprimir
         </button>
         <button
           disabled
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white/50 font-semibold text-sm"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white/10 text-white/50 font-semibold text-sm"
           title="Descargar PDF — Sesión 4"
         >
           <Download className="w-4 h-4" />
@@ -91,7 +91,7 @@ CG Constructora · Apartamentos Dominica
       </div>
 
       {disabled && (
-        <p className="text-xs text-turquesa mt-3 italic">
+        <p className="text-xs text-cielo mt-3 italic">
           Completa los datos del cliente y selecciona un apartamento para enviar.
         </p>
       )}
