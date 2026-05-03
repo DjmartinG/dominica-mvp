@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  // Indica explícitamente la raíz del proyecto (silencia warning de multiple lockfiles)
+  outputFileTracingRoot: path.join(__dirname),
+  
   images: {
     remotePatterns: [
       {
