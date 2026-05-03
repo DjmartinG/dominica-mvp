@@ -17,21 +17,23 @@ import { ResumenEconomico } from "@/components/cotizador/ResumenEconomico";
 import { PlanCuotas } from "@/components/cotizador/PlanCuotas";
 import { Alertas } from "@/components/cotizador/Alertas";
 import { AccionesFinales } from "@/components/cotizador/AccionesFinales";
+import { SimuladorCapacidad } from "@/components/cotizador/SimuladorCapacidad";
 import depositos from "@/data/depositos.json";
 import {
   Apto, Deposito, Cliente, PlanPago, Asesor, Cotizacion,
-  calcularSubtotal, calcularValorNeto, calcularCuotaInicial, calcularCronograma,
+  calcularValorNeto, calcularCuotaInicial, calcularCronograma,
   validarApto, validarDescuento, validarDeposito,
   generarNumeroCotizacion, calcularFechaVencimiento,
 } from "@/lib/cotizador";
-import { ArrowLeft, BookOpen, List, LayoutGrid } from "lucide-react";
+import { Parqueadero } from "@/lib/parqueaderos";
+import { ArrowLeft, BookOpen, List, LayoutGrid, Lock } from "lucide-react";
 
 const SIN_DEPOSITO = (depositos as Deposito[]).find((d) => d.id === "sin")!;
 const CLIENTE_VACIO: Cliente = { nombre: "", documento: "", celular: "", email: "" };
 
 export default function CotizarPage() {
   const [apto, setApto] = useState<Apto | null>(null);
-  const [conParqueadero, setConParqueadero] = useState(true);
+  const [parqueadero, setParqueadero] = useState<Parqueadero | null>(null);
   const [deposito, setDeposito] = useState<Deposito>(SIN_DEPOSITO);
   const [plan, setPlan] = useState<PlanPago>("Plan 30/70 Estándar");
   const [descuento, setDescuento] = useState(0);
@@ -39,6 +41,8 @@ export default function CotizarPage() {
   const [asesor, setAsesor] = useState<Asesor | null>(null);
   const [guardada, setGuardada] = useState(false);
   const [vistaSeleccion, setVistaSeleccion] = useState<"mapa" | "lista">("mapa");
+  const [simuladorCompleto, setSimuladorCompleto] = useState(false);
+  const [ingresoTotal, setIngresoTotal] = useState(0);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -47,20 +51,27 @@ export default function CotizarPage() {
     }
   }, []);
 
+  // Reset parqueadero cuando cambia el apto
+  useEffect(() => {
+    setParqueadero(null);
+  }, [apto]);
+
+  // Subtotal incluye SIEMPRE parqueadero (es obligatorio)
   const calculos = useMemo(() => {
     if (!apto) return null;
-    const subtotal = calcularSubtotal(apto, conParqueadero, deposito);
+    const valorParqueadero = parqueadero?.valor || apto.parqueadero.valor;
+    const subtotal = apto.valorApartamento + valorParqueadero + deposito.valor;
     const { valorDescuento, valorNeto } = calcularValorNeto(subtotal, descuento);
     const { cuotaInicial, cuotaInicialPct, saldoSubrogacion } = calcularCuotaInicial(valorNeto, plan);
     const cronograma = calcularCronograma(valorNeto, plan);
     return { subtotal, valorDescuento, valorNeto, cuotaInicial, cuotaInicialPct, saldoSubrogacion, cronograma };
-  }, [apto, conParqueadero, deposito, plan, descuento]);
+  }, [apto, parqueadero, deposito, plan, descuento]);
 
   const alertas = useMemo(() => {
     const lst = [];
     const a = validarApto(apto);
     if (a) lst.push(a);
-    lst.push(validarDescuento(descuento));
+    if (descuento > 0) lst.push(validarDescuento(descuento));
     lst.push(validarDeposito(deposito));
     return lst;
   }, [apto, descuento, deposito]);
@@ -73,7 +84,9 @@ export default function CotizarPage() {
       numero: "PREV-XXX",
       fechaEmision: new Date().toISOString(),
       fechaVencimiento: calcularFechaVencimiento(),
-      cliente, asesor, apto, conParqueadero, deposito, plan, descuento,
+      cliente, asesor, apto,
+      conParqueadero: true,
+      deposito, plan, descuento,
       subtotal: calculos.subtotal,
       valorDescuento: calculos.valorDescuento,
       valorNeto: calculos.valorNeto,
@@ -85,10 +98,10 @@ export default function CotizarPage() {
       separacion: 9000000,
       cronograma: calculos.cronograma,
       estadoSeguimiento: "Cotizado",
-      notasAsesor: "",
+      notasAsesor: ingresoTotal > 0 ? `Ingreso declarado: ${new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(ingresoTotal)}` : "",
       createdAt: new Date().toISOString(),
     };
-  }, [apto, calculos, completo, cliente, asesor, conParqueadero, deposito, plan, descuento]);
+  }, [apto, calculos, completo, cliente, asesor, deposito, plan, descuento, ingresoTotal]);
 
   const handleGuardar = () => {
     if (!cotizacion) return;
@@ -123,18 +136,17 @@ export default function CotizarPage() {
             <p className="eyebrow mb-4">Cotizador Dominica</p>
             <h1 className="section-title mb-3">Construye tu cotización</h1>
             <p className="text-gris text-sm tracking-wide max-w-xl mx-auto">
-              Selecciona apartamento, parqueadero, depósito, plan de pago y cliente. Calculamos en tiempo real.
+              Sigue los pasos: apartamento → plan de pago → datos → simulador → descuento.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-              {/* SECCIÓN 1 — TU APARTAMENTO con vista mapa o lista */}
+
+              {/* PASO 1 — Apartamento + parqueadero (obligatorio) + depósito (opcional) */}
               <div className="bg-white p-6 lg:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                   <h2 className="font-display text-2xl text-negro tracking-wide">1 · Tu apartamento</h2>
-                  
-                  {/* Toggle vista mapa/lista */}
                   <div className="inline-flex bg-beige border border-gris-muyclaro p-1">
                     <button
                       onClick={() => setVistaSeleccion("mapa")}
@@ -164,43 +176,88 @@ export default function CotizarPage() {
                 )}
 
                 {apto && (
-                  <div className="mt-6 pt-6 border-t border-gris-muyclaro space-y-4">
-                    <ParqueaderoToggle apto={apto} incluido={conParqueadero} onToggle={setConParqueadero} />
+                  <div className="mt-6 pt-6 border-t border-gris-muyclaro space-y-6">
+                    <ParqueaderoToggle apto={apto} parqueaderoSeleccionado={parqueadero} onSelect={setParqueadero} />
                     <DepositoSelector selected={deposito} onSelect={setDeposito} />
                   </div>
                 )}
               </div>
 
+              {/* PASO 2 — Plan de pago */}
               {apto && (
-                <div className="bg-white p-8 space-y-5">
-                  <h2 className="font-display text-2xl text-negro tracking-wide">2 · Plan de pago</h2>
+                <div className="bg-white p-6 lg:p-8">
+                  <h2 className="font-display text-2xl text-negro tracking-wide mb-6">2 · Plan de pago</h2>
                   <PlanPagoSelector selected={plan} onSelect={setPlan} />
-                  <DescuentoSlider value={descuento} onChange={setDescuento} />
                 </div>
               )}
 
+              {/* PASO 3 — Datos del cliente */}
               {apto && (
-                <div className="bg-white p-8">
-                  <DatosCliente cliente={cliente} onChange={setCliente} />
+                <div className="bg-white p-6 lg:p-8">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="font-display text-2xl text-negro tracking-wide">3 ·</span>
+                    <DatosCliente cliente={cliente} onChange={setCliente} />
+                  </div>
                 </div>
               )}
 
-              {alertas.length > 0 && (
+              {/* PASO 4 — Cronograma de cuotas (visible automáticamente) */}
+              {calculos && (
+                <div>
+                  <p className="font-display text-2xl text-negro tracking-wide mb-4 px-1">4 · Cronograma de pagos</p>
+                  <PlanCuotas cuotas={calculos.cronograma} valorNeto={calculos.valorNeto} />
+                </div>
+              )}
+
+              {/* PASO 5 — Simulador de capacidad */}
+              {apto && calculos && (
+                <SimuladorCapacidad
+                  apto={apto}
+                  valorNeto={calculos.valorNeto}
+                  cuotaInicial={calculos.cuotaInicial}
+                  plan={plan}
+                  onCompletar={(c, ing) => { setSimuladorCompleto(c); setIngresoTotal(ing); }}
+                />
+              )}
+
+              {/* PASO 6 — Descuento (BLOQUEADO hasta completar simulador) */}
+              {apto && (
+                <div className={`bg-white p-6 lg:p-8 transition-all ${
+                  !simuladorCompleto ? "opacity-50" : ""
+                }`}>
+                  <div className="flex items-center gap-3 mb-6">
+                    <h2 className="font-display text-2xl text-negro tracking-wide">6 · Descuento comercial</h2>
+                    {!simuladorCompleto && (
+                      <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase font-semibold bg-rojo/10 text-rojo px-3 py-1.5">
+                        <Lock className="w-3 h-3" /> Bloqueado
+                      </span>
+                    )}
+                  </div>
+                  
+                  {!simuladorCompleto ? (
+                    <p className="text-sm text-gris italic">
+                      Completa el simulador de capacidad (paso 5) para desbloquear la opción de descuento. El descuento se aplica como cierre comercial una vez confirmado el panorama financiero del cliente.
+                    </p>
+                  ) : (
+                    <DescuentoSlider value={descuento} onChange={setDescuento} />
+                  )}
+                </div>
+              )}
+
+              {/* Alertas */}
+              {alertas.length > 0 && simuladorCompleto && (
                 <div className="bg-white p-6">
                   <h3 className="font-display text-lg text-negro tracking-wide mb-3">Alertas y validaciones</h3>
                   <Alertas alertas={alertas} />
                 </div>
               )}
-
-              {calculos && (
-                <PlanCuotas cuotas={calculos.cronograma} valorNeto={calculos.valorNeto} />
-              )}
             </div>
 
+            {/* Columna derecha sticky */}
             <div className="lg:col-span-1 space-y-4">
               <ResumenEconomico
                 apto={apto}
-                conParqueadero={conParqueadero}
+                conParqueadero={true}
                 deposito={deposito}
                 plan={plan}
                 descuento={descuento}
@@ -217,6 +274,8 @@ export default function CotizarPage() {
                         setApto(null);
                         setCliente(CLIENTE_VACIO);
                         setDescuento(0);
+                        setSimuladorCompleto(false);
+                        setIngresoTotal(0);
                       }}
                       className="flex-1 px-3 py-2 bg-navy text-white tracking-[0.15em] uppercase hover:bg-navy-dark transition-colors"
                     >

@@ -1,6 +1,6 @@
 import reglas from "@/data/reglas-comerciales.json";
 
-export type PlanPago = "Plan 30/70 Estándar" | "Plan Contado" | "Plan Variable";
+export type PlanPago = "Plan 30/70 Estándar" | "Plan Contado";
 export type EstadoSeguimiento = "Cotizado" | "Visitó" | "Reservó" | "Vendió" | "Descartó";
 
 export interface Apto {
