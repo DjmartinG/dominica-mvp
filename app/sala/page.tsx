@@ -16,7 +16,6 @@ export default function SalaPage() {
 
   const handleStart = () => {
     if (!selectedCode) return;
-    // En MVP guardamos el asesor en sessionStorage
     if (typeof window !== "undefined") {
       const asesor = asesores.find((a) => a.codigo === selectedCode);
       if (asesor) {
@@ -29,9 +28,9 @@ export default function SalaPage() {
 
   return (
     <>
-      <BannerCG />
+      <BannerCG ghost={false} />
 
-      <main className="flex-1 bg-gradient-to-br from-crema to-turquesa-light py-12 px-6">
+      <main className="flex-1 bg-gradient-to-br from-crema to-turquesa-light pt-32 pb-20 px-6">
         <div className="max-w-3xl mx-auto">
           <Link
             href="/"
@@ -45,23 +44,22 @@ export default function SalaPage() {
             <div className="flex items-center gap-4 mb-6">
               <LogoDominica variant="color" size="md" />
               <div className="flex-1">
-                <p className="text-xs uppercase tracking-widest text-cg-dorado font-semibold">
+                <p className="text-xs uppercase tracking-[0.3em] text-cg-dorado font-semibold">
                   Modo Sala
                 </p>
-                <h1 className="font-display text-3xl text-caribe">
+                <h1 className="font-display text-4xl text-caribe">
                   Bienvenido, asesor
                 </h1>
               </div>
             </div>
 
-            <p className="text-carbon mb-6">
+            <p className="text-carbon mb-6 leading-relaxed">
               Selecciona tu nombre para iniciar el tour con el cliente. Tu información quedará asociada
               automáticamente a la cotización al final del proceso.
             </p>
 
-            {/* Lista de asesores */}
             <div className="space-y-2 mb-6">
-              <label className="text-xs font-semibold uppercase tracking-widest text-caribe">
+              <label className="text-xs font-semibold uppercase tracking-[0.25em] text-caribe">
                 Asesor comercial
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -69,7 +67,7 @@ export default function SalaPage() {
                   <button
                     key={a.codigo}
                     onClick={() => setSelectedCode(a.codigo)}
-                    className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left ${
+                    className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all duration-400 text-left ${
                       selectedCode === a.codigo
                         ? "border-caribe bg-caribe text-white shadow-caribe"
                         : "border-turquesa-light bg-white hover:border-caribe/50"
@@ -91,7 +89,6 @@ export default function SalaPage() {
               </div>
             </div>
 
-            {/* CTA */}
             <button
               onClick={handleStart}
               disabled={!selectedCode}
@@ -101,7 +98,6 @@ export default function SalaPage() {
               <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Info pie */}
             <p className="text-xs text-carbon/60 text-center mt-4 italic">
               Datos del proyecto: {brand.proyecto.direccion} · {brand.proyecto.estructura}
             </p>

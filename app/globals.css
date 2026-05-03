@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ============ AQUAWAX (custom de cgconstructora.com) ============ */
+/* ============ AQUAWAX (mantener para uso secundario) ============ */
 @font-face {
   font-family: 'Aquawax';
   font-weight: 400;
@@ -48,14 +48,16 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* H1-H4 ahora con Playfair Display por default */
 h1, h2, h3, h4 {
-  font-family: 'Aquawax', var(--font-montserrat), Arial, sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--font-lora), 'Aquawax', 'Georgia', serif;
+  letter-spacing: -0.015em;
+  font-weight: 500;
 }
 
 /* ============ COMPONENTES UTILITARIOS ============ */
 .btn-cta {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all;
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-400;
   background-color: var(--cielo);
   box-shadow: 0 4px 12px rgba(0, 137, 247, 0.3);
 }
@@ -66,7 +68,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all;
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-400;
   background-color: var(--caribe);
   box-shadow: 0 4px 12px rgba(0, 109, 104, 0.3);
 }
@@ -76,7 +78,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all;
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-400;
   background-color: var(--turquesa);
   color: var(--carbon);
 }
@@ -85,7 +87,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all border-2;
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-400 border-2;
   border-color: var(--caribe);
   color: var(--caribe);
   background-color: transparent;
@@ -96,42 +98,69 @@ h1, h2, h3, h4 {
 }
 
 .card-dominica {
-  @apply bg-white rounded-2xl p-6 transition-all;
+  @apply bg-white rounded-2xl p-6 transition-all duration-400;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 .card-dominica:hover {
-  box-shadow: 0 8px 24px rgba(0, 109, 104, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 109, 104, 0.15);
+  transform: translateY(-2px);
 }
 
 .card-amenidad {
-  @apply rounded-2xl p-6 transition-all;
+  @apply rounded-2xl p-6 transition-all duration-400;
   background: var(--turquesa-light);
 }
 
+/* === Hero heading premium con Playfair === */
 .heading-hero {
-  font-family: 'Aquawax', var(--font-montserrat), Arial, sans-serif;
+  font-family: var(--font-lora), 'Aquawax', 'Georgia', serif;
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.heading-hero em {
+  font-style: italic;
   font-weight: 400;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
 }
 
+/* Slogan italic premium */
 .slogan {
-  @apply italic font-light;
-  font-family: var(--font-roboto-slab), Georgia, serif;
+  font-family: var(--font-lora), 'Georgia', serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
+.slogan em {
+  font-style: italic;
+  color: var(--turquesa);
+}
+
+/* Banner CG navy con dorado */
 .banner-cg {
   background-color: var(--cg-navy);
-  border-bottom: 3px solid var(--cg-dorado);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.4);
 }
 
+/* Hero overlay MÁS SUTIL (25% en vez de 40-85%) */
 .bg-hero-overlay {
-  background: linear-gradient(180deg, rgba(0, 109, 104, 0.4) 0%, rgba(0, 77, 73, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 109, 104, 0.15) 0%, rgba(0, 77, 73, 0.55) 100%);
 }
 
+/* Statement number (datos numéricos grandes premium) */
+.statement-number {
+  font-family: var(--font-lora), 'Georgia', serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--caribe-dark);
+}
+
+/* Animaciones */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -140,14 +169,24 @@ h1, h2, h3, h4 {
   to { opacity: 1; }
 }
 
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

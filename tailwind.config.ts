@@ -29,15 +29,22 @@ const config: Config = {
         warn: "#F9A825",
       },
       fontFamily: {
-        display: ["Aquawax", "var(--font-montserrat)", "Arial", "sans-serif"],
+        // Display elegante para hero y H1 (Playfair = serif premium)
+        display: ["var(--font-lora)", "Aquawax", "Georgia", "serif"],
+        // Serif decorativo
+        serif: ["var(--font-lora)", "Georgia", "serif"],
+        // Sans-serif moderno para body
         sans: ["var(--font-roboto)", "Arial", "sans-serif"],
-        heading: ["var(--font-montserrat)", "Arial", "sans-serif"],
+        // Headers de sección
+        heading: ["var(--font-lora)", "Georgia", "serif"],
+        // Slab para subtítulos decorativos
         slab: ["var(--font-roboto-slab)", "Georgia", "serif"],
       },
       fontSize: {
-        hero: ["clamp(2.5rem, 6vw, 4.5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        h1: ["clamp(1.75rem, 3.5vw, 2.5rem)", { lineHeight: "1.2" }],
-        h2: ["clamp(1.25rem, 2.5vw, 1.75rem)", { lineHeight: "1.3" }],
+        hero: ["clamp(3rem, 7vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        h1: ["clamp(2rem, 4vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.015em" }],
+        h2: ["clamp(1.5rem, 3vw, 2rem)", { lineHeight: "1.25" }],
+        statement: ["clamp(2.5rem, 5vw, 4rem)", { lineHeight: "1", letterSpacing: "-0.02em" }],
       },
       backgroundImage: {
         'caribe-gradient': 'linear-gradient(135deg, #006D68 0%, #004D49 100%)',
@@ -46,6 +53,10 @@ const config: Config = {
       boxShadow: {
         'caribe': '0 8px 24px rgba(0, 109, 104, 0.15)',
         'card': '0 4px 12px rgba(0, 0, 0, 0.08)',
+        'lift': '0 20px 40px -12px rgba(0, 109, 104, 0.25)',
+      },
+      transitionDuration: {
+        '400': '400ms',
       },
     },
   },

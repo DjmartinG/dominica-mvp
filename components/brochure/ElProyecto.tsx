@@ -10,19 +10,19 @@ export function ElProyecto() {
   ];
 
   return (
-    <section id="proyecto" className="py-24 px-6 bg-white">
+    <section id="proyecto" className="py-32 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-cg-dorado uppercase tracking-widest text-sm font-semibold mb-3">
-            El Proyecto
+        <div className="text-center mb-16">
+          <p className="text-cg-dorado uppercase tracking-[0.3em] text-xs font-semibold mb-4">
+            ─── El Proyecto ───
           </p>
-          <h2 className="font-display text-h1 text-caribe mb-6">
+          <h2 className="font-display text-h1 text-caribe mb-4">
             Vive la esencia del Caribe en tu hogar
           </h2>
-          <div className="w-24 h-1 bg-turquesa mx-auto mb-6" />
+          <div className="w-16 h-px bg-cg-dorado mx-auto mb-6" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Imagen */}
           <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-caribe">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -39,10 +39,10 @@ export function ElProyecto() {
           </div>
 
           {/* Texto */}
-          <div className="space-y-5 text-carbon leading-relaxed">
-            <p className="text-lg italic text-caribe slogan">
+          <div className="space-y-6 text-carbon leading-relaxed">
+            <p className="text-xl slogan text-caribe italic">
               &ldquo;Imagina despertar cada día rodeado de la tranquilidad, el diseño y la frescura
-              de una isla caribeña, sin salir de la ciudad.&rdquo;
+              de una <em className="text-caribe-dark">isla caribeña</em>, sin salir de la ciudad.&rdquo;
             </p>
             <p>
               <strong className="text-caribe">Apartamentos Dominica</strong> en Pereira es un
@@ -63,11 +63,11 @@ export function ElProyecto() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20">
           {stats.map((s) => (
             <div key={s.label} className="card-amenidad text-center">
-              <s.icon className="w-8 h-8 text-caribe mx-auto mb-2" />
-              <p className="text-xs uppercase tracking-widest text-carbon/60 mb-1">{s.label}</p>
+              <s.icon className="w-8 h-8 text-caribe mx-auto mb-3" />
+              <p className="text-xs uppercase tracking-[0.2em] text-carbon/60 mb-2">{s.label}</p>
               <p className="font-display text-caribe-dark text-lg">{s.value}</p>
             </div>
           ))}

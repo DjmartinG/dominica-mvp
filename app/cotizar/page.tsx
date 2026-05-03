@@ -1,32 +1,232 @@
+"use client";
+
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { BannerCG } from "@/components/BannerCG";
 import { FooterDominica } from "@/components/FooterDominica";
-import { ArrowLeft, Calculator } from "lucide-react";
+import { AptoSelector } from "@/components/cotizador/AptoSelector";
+import { ParqueaderoToggle } from "@/components/cotizador/ParqueaderoToggle";
+import { DepositoSelector } from "@/components/cotizador/DepositoSelector";
+import { PlanPagoSelector } from "@/components/cotizador/PlanPagoSelector";
+import { DescuentoSlider } from "@/components/cotizador/DescuentoSlider";
+import { DatosCliente } from "@/components/cotizador/DatosCliente";
+import { ResumenEconomico } from "@/components/cotizador/ResumenEconomico";
+import { PlanCuotas } from "@/components/cotizador/PlanCuotas";
+import { Alertas } from "@/components/cotizador/Alertas";
+import { AccionesFinales } from "@/components/cotizador/AccionesFinales";
+import depositos from "@/data/depositos.json";
+import {
+  Apto,
+  Deposito,
+  Cliente,
+  PlanPago,
+  Asesor,
+  Cotizacion,
+  calcularSubtotal,
+  calcularValorNeto,
+  calcularCuotaInicial,
+  calcularCronograma,
+  validarApto,
+  validarDescuento,
+  validarDeposito,
+  generarNumeroCotizacion,
+  calcularFechaVencimiento,
+} from "@/lib/cotizador";
+import { ArrowLeft, Sparkles } from "lucide-react";
+
+const SIN_DEPOSITO = (depositos as Deposito[]).find((d) => d.id === "sin")!;
+const CLIENTE_VACIO: Cliente = { nombre: "", documento: "", celular: "", email: "" };
 
 export default function CotizarPage() {
+  const [apto, setApto] = useState<Apto | null>(null);
+  const [conParqueadero, setConParqueadero] = useState(true);
+  const [deposito, setDeposito] = useState<Deposito>(SIN_DEPOSITO);
+  const [plan, setPlan] = useState<PlanPago>("Plan 30/70 Estándar");
+  const [descuento, setDescuento] = useState(0);
+  const [cliente, setCliente] = useState<Cliente>(CLIENTE_VACIO);
+  const [asesor, setAsesor] = useState<Asesor | null>(null);
+  const [guardada, setGuardada] = useState(false);
+
+  // Cargar asesor del modo sala (si existe)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("dominica_asesor");
+      if (saved) setAsesor(JSON.parse(saved));
+    }
+  }, []);
+
+  // Cálculos derivados (en tiempo real)
+  const calculos = useMemo(() => {
+    if (!apto) return null;
+    const subtotal = calcularSubtotal(apto, conParqueadero, deposito);
+    const { valorDescuento, valorNeto } = calcularValorNeto(subtotal, descuento);
+    const { cuotaInicial, cuotaInicialPct, saldoSubrogacion } = calcularCuotaInicial(valorNeto, plan);
+    const cronograma = calcularCronograma(valorNeto, plan);
+    return { subtotal, valorDescuento, valorNeto, cuotaInicial, cuotaInicialPct, saldoSubrogacion, cronograma };
+  }, [apto, conParqueadero, deposito, plan, descuento]);
+
+  // Alertas
+  const alertas = useMemo(() => {
+    const lst = [];
+    const a = validarApto(apto);
+    if (a) lst.push(a);
+    lst.push(validarDescuento(descuento));
+    lst.push(validarDeposito(deposito));
+    return lst;
+  }, [apto, descuento, deposito]);
+
+  // ¿Listo para enviar?
+  const completo = !!(apto && apto.estado === "Disponible" && cliente.nombre.length > 2 && cliente.celular.length >= 7);
+
+  // Cotización armada (para enviar)
+  const cotizacion: Cotizacion | null = useMemo(() => {
+    if (!apto || !calculos || !completo) return null;
+    return {
+      numero: "PREV-XXX",
+      fechaEmision: new Date().toISOString(),
+      fechaVencimiento: calcularFechaVencimiento(),
+      cliente,
+      asesor,
+      apto,
+      conParqueadero,
+      deposito,
+      plan,
+      descuento,
+      subtotal: calculos.subtotal,
+      valorDescuento: calculos.valorDescuento,
+      valorNeto: calculos.valorNeto,
+      cuotaInicial: calculos.cuotaInicial,
+      cuotaInicialPct: calculos.cuotaInicialPct,
+      saldoSubrogacion: calculos.saldoSubrogacion,
+      numCuotas: 26,
+      cuotaMensual: plan === "Plan Contado" ? 0 : Math.round((calculos.cuotaInicial - 9000000) / 26),
+      separacion: 9000000,
+      cronograma: calculos.cronograma,
+      estadoSeguimiento: "Cotizado",
+      notasAsesor: "",
+      createdAt: new Date().toISOString(),
+    };
+  }, [apto, calculos, completo, cliente, asesor, conParqueadero, deposito, plan, descuento]);
+
+  const handleGuardar = () => {
+    if (!cotizacion) return;
+    const num = generarNumeroCotizacion();
+    const final = { ...cotizacion, numero: num };
+    
+    const stored = JSON.parse(localStorage.getItem("dominica_cotizaciones") || "[]");
+    stored.push(final);
+    localStorage.setItem("dominica_cotizaciones", JSON.stringify(stored));
+    
+    setGuardada(true);
+    setTimeout(() => setGuardada(false), 3000);
+  };
+
   return (
     <>
-      <BannerCG />
+      <BannerCG variant="compact" />
 
-      <main className="flex-1 bg-crema py-16 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-caribe hover:text-caribe-dark mb-8 font-semibold"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver al inicio
-          </Link>
+      <main className="bg-crema min-h-screen pt-24 pb-12 px-4 sm:px-6 print:bg-white print:py-0">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6 no-print">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-caribe hover:text-caribe-dark font-semibold"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Volver
+            </Link>
+            {asesor && (
+              <div className="bg-white rounded-full px-4 py-2 shadow-card flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-cg-dorado" />
+                <span className="text-sm">
+                  Asesor: <strong className="text-caribe">{asesor.nombre}</strong>
+                </span>
+              </div>
+            )}
+          </div>
 
-          <div className="card-dominica">
-            <Calculator className="w-16 h-16 text-caribe mx-auto mb-4" />
-            <h1 className="font-display text-3xl text-caribe mb-3">Cotizador</h1>
-            <p className="text-carbon mb-2">
-              Esta sección se construye en la <strong>Sesión 3</strong>.
+          <div className="text-center mb-8">
+            <p className="text-cg-dorado uppercase tracking-widest text-sm font-semibold mb-2">
+              Cotizador Dominica
             </p>
-            <p className="text-sm text-carbon/70">
-              Incluirá: selector apto disponible, parqueadero, depósito, plan de pago, validaciones de descuento, y resumen económico en tiempo real.
+            <h1 className="font-display text-4xl text-caribe mb-2">
+              Construye tu cotización
+            </h1>
+            <p className="text-carbon/60 text-sm">
+              Selecciona apartamento, parqueadero, depósito, plan de pago y cliente. Calculamos en
+              tiempo real.
             </p>
+          </div>
+
+          {/* Layout 2 columnas en lg */}
+          <div className="grid lg:grid-cols-3 gap-6">
+            {/* Columna izquierda — Formulario */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* 1. Selección unidad */}
+              <div className="card-dominica space-y-4">
+                <h2 className="font-display text-caribe text-2xl">1 · Tu apartamento</h2>
+                <AptoSelector selected={apto} onSelect={setApto} />
+                {apto && (
+                  <>
+                    <ParqueaderoToggle apto={apto} incluido={conParqueadero} onToggle={setConParqueadero} />
+                    <DepositoSelector selected={deposito} onSelect={setDeposito} />
+                  </>
+                )}
+              </div>
+
+              {/* 2. Plan de pago */}
+              {apto && (
+                <div className="card-dominica space-y-4">
+                  <h2 className="font-display text-caribe text-2xl">2 · Plan de pago</h2>
+                  <PlanPagoSelector selected={plan} onSelect={setPlan} />
+                  <DescuentoSlider value={descuento} onChange={setDescuento} />
+                </div>
+              )}
+
+              {/* 3. Datos cliente */}
+              {apto && (
+                <div className="card-dominica">
+                  <DatosCliente cliente={cliente} onChange={setCliente} />
+                </div>
+              )}
+
+              {/* 4. Alertas */}
+              {alertas.length > 0 && (
+                <div className="card-dominica">
+                  <h3 className="font-display text-caribe text-lg mb-3">Alertas y validaciones</h3>
+                  <Alertas alertas={alertas} />
+                </div>
+              )}
+
+              {/* 5. Cronograma */}
+              {calculos && (
+                <PlanCuotas cuotas={calculos.cronograma} valorNeto={calculos.valorNeto} />
+              )}
+            </div>
+
+            {/* Columna derecha — Resumen sticky */}
+            <div className="lg:col-span-1 space-y-4">
+              <ResumenEconomico
+                apto={apto}
+                conParqueadero={conParqueadero}
+                deposito={deposito}
+                plan={plan}
+                descuento={descuento}
+              />
+              {apto && (
+                <AccionesFinales
+                  cotizacion={cotizacion}
+                  disabled={!completo}
+                  onGuardar={handleGuardar}
+                />
+              )}
+              {guardada && (
+                <div className="bg-ok/10 border-2 border-ok text-ok p-3 rounded-xl text-sm font-semibold text-center animate-fade-in">
+                  ✓ Cotización guardada exitosamente
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </main>

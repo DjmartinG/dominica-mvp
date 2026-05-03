@@ -12,16 +12,16 @@ const PUNTOS_INTERES = [
 
 export function Ubicacion() {
   return (
-    <section id="ubicacion" className="py-24 px-6 bg-crema">
+    <section id="ubicacion" className="py-32 px-6 bg-crema">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-cg-dorado uppercase tracking-widest text-sm font-semibold mb-3">
-            Ubicación Privilegiada
+        <div className="text-center mb-16">
+          <p className="text-cg-dorado uppercase tracking-[0.3em] text-xs font-semibold mb-4">
+            ─── Ubicación Privilegiada ───
           </p>
-          <h2 className="font-display text-h1 text-caribe mb-3">
+          <h2 className="font-display text-h1 text-caribe mb-4">
             En el corazón de Pereira
           </h2>
-          <div className="w-24 h-1 bg-turquesa mx-auto mb-6" />
+          <div className="w-16 h-px bg-cg-dorado mx-auto mb-6" />
           <div className="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-card">
             <MapPin className="w-5 h-5 text-cielo" />
             <span className="text-carbon font-semibold">{brand.proyecto.direccion}</span>
@@ -52,7 +52,7 @@ export function Ubicacion() {
 
           {/* Puntos de interés */}
           <div className="space-y-3">
-            <h3 className="font-display text-caribe text-lg mb-4">Cerca de todo</h3>
+            <h3 className="font-display text-caribe text-xl mb-4">Cerca de todo</h3>
             {PUNTOS_INTERES.map((p) => (
               <div
                 key={p.nombre}

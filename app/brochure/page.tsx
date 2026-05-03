@@ -9,21 +9,21 @@ import { Recorrido360 } from "@/components/brochure/Recorrido360";
 import { Etapas } from "@/components/brochure/Etapas";
 import { BrochureNav } from "@/components/brochure/BrochureNav";
 import { CTAFlotante } from "@/components/brochure/CTAFlotante";
+import { Divider } from "@/components/brochure/Divider";
 
 export default function BrochurePage() {
   return (
     <>
-      {/* Banner CG fijo arriba */}
-      <div className="fixed top-0 left-0 right-0 z-20">
-        <BannerCG variant="compact" />
-      </div>
+      <BannerCG variant="compact" ghost />
 
       <main className="relative">
         <div id="hero">
           <HeroCarousel />
         </div>
         <ElProyecto />
+        <Divider />
         <Ubicacion />
+        <Divider />
         <Tipologias />
         <Amenidades />
         <Recorrido360 />
