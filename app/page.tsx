@@ -3,7 +3,7 @@ import { BannerCG } from "@/components/BannerCG";
 import { FooterDominica } from "@/components/FooterDominica";
 import { LogoDominica } from "@/components/Logos";
 import { brand } from "@/lib/design-tokens";
-import { ChevronRight, Home, Briefcase } from "lucide-react";
+import { ChevronRight, Home as HomeIcon, Briefcase } from "lucide-react";
 
 export default function Home() {
   return (
@@ -80,7 +80,7 @@ export default function Home() {
                   className="group bg-white hover:bg-turquesa transition-all duration-300 rounded-2xl p-6 text-left flex items-start gap-4 shadow-card hover:shadow-caribe"
                 >
                   <div className="bg-cielo text-white p-3 rounded-xl group-hover:bg-cielo/90 transition-colors">
-                    <Home className="w-6 h-6" />
+                    <HomeIcon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-display text-caribe text-xl mb-1 group-hover:text-caribe-dark">
